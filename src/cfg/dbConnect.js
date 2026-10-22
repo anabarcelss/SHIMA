@@ -1,9 +1,20 @@
 import "dotenv/config.js";
-import mongoose from "mongoose";
-const MONGOKEY = process.env.MONGOKEY;
+const HOST = process.env.HOST || 'localhost'
+const PORT = process.env.PORT || 3306;
+const USERDB = process.env.USERDB
+const PASSWORD = process.env.PASSWORD;
+const DATABASE = process.env.DATABASE;
+import mysql from 'mysql2'
 
-async function connectDatabase() {
-  mongoose.connect(MONGOKEY);
-  return mongoose.connection;
-}
-export default connectDatabase;
+const databaseConnect = mysql.createConnection({
+  host:HOST,
+  port: PORT,
+  user: USERDB,
+  password: PASSWORD,
+  database : DATABASE
+})
+databaseConnect.connect((e)=>{
+  if(e) throw e
+  console.log('Connected to DataBase')
+})
+export default databaseConnect

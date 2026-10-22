@@ -1,25 +1,28 @@
-import "dotenv/config.js";
-import bcrypt from "bcrypt";
-import mongoose from "mongoose";
-const registerSchema = new mongoose.Schema(
-  {
-    id: { type: mongoose.Schema.ObjectId },
-    nome: { type: String, required: true },
-    // email:{type:String, required:true},
-    password: { type: String, required: true },
-    telefone: { type: String, required: true },
-  },
-  { versionKey: false },
-);
-registerSchema.pre("save", async function (req, res) {
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-  } catch (err) {
-    throw new Error(err);
-  }
-});
+import e from "express"
+import databaseConnect from "../cfg/dbConnect.js"
+class UserModel {
+constructor(name,age,number, address){
+this.name = name
+this.age = age
+this.number = number
+this.address = address
 
-const User = mongoose.model("usuarios", registerSchema);
+}
 
-export default User;
+async Create(){
+  const sql = `INSERT INTO users(name,age, number, address) VALUES (?,?,?,?)`
+  const values = [this.name, this.age, this.number, this.address]
+  databaseConnect.query(sql,values,(e)=>{
+    if(e)throw e
+  })
+}
+
+async getAll(req,res){
+  const sql = `SELECT * FROM users`
+  databaseConnect.query(sql, (e, result)=>{
+    if (e) throw e 
+    res.send(result)
+  })
+}
+}
+export default UserModel

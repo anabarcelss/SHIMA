@@ -1,3 +1,4 @@
+import databaseConnect from "../cfg/dbConnect.js";
 import User from "../models/User.js";
 class UserController {
   static async isValidPassword(password) {
@@ -10,10 +11,10 @@ class UserController {
   }
   static async registerAuth(req, res) {
     try {
-      const { nome, password, telefone } = req.body;
-      const user = new User({ nome, password, telefone });
-      await user.save();
-      res.status(200).json({ msg: `Usuário criado ${user}` });
+      const { name, age, number, address } = req.body;
+      const user = new User(name, age, number, address);
+      await user.Create();
+      res.status(200).json({ msg: `Usuário criado ${user.name}` });
 
       /*  const registerForm = await User.create(req.body);
       this.isValidPassword(req.body.password);
@@ -27,14 +28,54 @@ class UserController {
 
   static async getAllUsers(req, res) {
     try {
-      const users = await User.find({});
-      res.status(200).json(users);
+      const sql = 'SELECT * FROM users'
+      databaseConnect.query(sql, (e, result)=>{
+    if (e) throw e 
+    res.send(result)
+  })
     } catch (e) {
       res.status(500).json({ msg: `erro na requisição ${e.message}` });
     }
   }
 
-  static async loginUser(req, res) {
+  static async getUserByID(req,res){
+    const id = req.params.id
+    try{
+      const sql = `SELECT * FROM users WHERE id = ?`
+      databaseConnect.query(sql,id, (e, result)=>{
+        if(e) throw e
+        res.status(200).json({result})
+      })
+    } catch(e){
+      console.log(e.message)
+    }
+  }
+  
+  static async updateUser(req,res){
+    const id = req.params.id
+    const {name, number, address} = req.body
+    const values = [
+      name??null,
+      number??null,
+      address??null,
+      id
+    ]
+    try{
+      const sql = `UPDATE users SET 
+      name=COALESCE(?, name), 
+      number=COALESCE(?, number),
+      address=COALESCE(?, address) 
+      WHERE id = ?`
+      databaseConnect.query(sql,values,(e, result)=>{
+        if(e)throw e
+        res.status(200).json({msg:'usuario atualizado com sucesso', result})
+      })
+    } catch(e){
+      console.log(e.message)
+    }
+  }
+
+/*   static async loginUser(req, res) {
     try {
       const login = await User.find({
         name: req.body.name,
@@ -49,17 +90,21 @@ class UserController {
     } catch (e) {
       res.status(500).json({ msg: `Erro na requisição ${e.message}` });
     }
-  }
+  } */
 
   static async deleteUser(req, res) {
     try {
       const id = req.params.id;
-      const deletedUser = await User.findByIdAndDelete(id);
-      res.status(200).json({ msg: `Usuario deletado com sucesso` });
+      const sql = `DELETE FROM users WHERE id = ${id}`
+      databaseConnect.query(sql,(e)=>{
+        if(e) throw e
+        res.status(200).json({ msg: `Usuario deletado com sucesso` });
+      })
     } catch (e) {
       res.status(500).json({ msg: `Erro ao deletar usuario ${e.message}` });
     }
   }
+
 }
 
 export default UserController;

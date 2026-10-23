@@ -1,5 +1,6 @@
 import databaseConnect from "../cfg/dbConnect.js";
 import User from "../models/User.js";
+import EncryptPassword from "../cfg/bcryptHash.js";
 class UserController {
   static async isValidPassword(password) {
     try {
@@ -11,10 +12,12 @@ class UserController {
   }
   static async registerAuth(req, res) {
     try {
-      const { name, age, number, address } = req.body;
-      const user = new User(name, age, number, address);
+      let { name,password, age, number, address } = req.body;
+      if(!password) return res.status(400).send('Senha não inserida ou inválida' + password)
+      password = await EncryptPassword(password)
+      const user = new User(name, age, number, address, password);
       await user.Create();
-      res.status(200).json({ msg: `Usuário criado ${user.name}` });
+      res.status(200).json({ msg: `Usuário criado ${user.name} ${user.id}` });
 
       /*  const registerForm = await User.create(req.body);
       this.isValidPassword(req.body.password);

@@ -8,4 +8,10 @@ async function EncryptPassword(pw){
         return hash
 
 }
-export default EncryptPassword
+async function ComparePassword(data, encriptedPassword) {
+
+const result = await bcrypt.compare(data, encriptedPassword)
+        return result   
+}
+
+export {EncryptPassword, ComparePassword}

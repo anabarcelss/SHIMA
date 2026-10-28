@@ -1,18 +1,18 @@
 import e from "express"
 import databaseConnect from "../cfg/dbConnect.js"
 class UserModel {
-constructor(name,age,number, address, password){
+constructor(name,password ,email,number, address){
 this.name = name
-this.age = age
+this.password = password
+this.email = email
 this.number = number
 this.address = address
-this.password = password
 
 }
 
 async Create(){
-  const sql = `INSERT INTO users(name,age, number, address, password) VALUES (?,?,?,?,?)`
-  const values = [this.name, this.age, this.number, this.address, this.password]
+  const sql = `INSERT INTO users(name,password, email, number, address) VALUES (?,?,?,?,?)`
+  const values = [this.name,this.password,this.email, this.number, this.address]
   databaseConnect.query(sql,values,(e)=>{
     if(e)throw e
   })

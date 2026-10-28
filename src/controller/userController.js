@@ -1,21 +1,49 @@
 import databaseConnect from "../cfg/dbConnect.js";
 import User from "../models/User.js";
-import EncryptPassword from "../cfg/bcryptHash.js";
+import express from 'express'
+import {generateToken} from "../cfg/jwToken.js";
+import {EncryptPassword, ComparePassword} from "../cfg/bcryptHash.js";
 class UserController {
-  static async isValidPassword(password) {
-    try {
-      // Compara a senha fornecida com o hash armazenado
-      return await bcrypt.compare(password, this.password);
-    } catch (error) {
-      throw new Error("Falha na comparação da senha");
+  static async customerLogin(req, res) {
+    const email = req.body.email
+    const sql = `SELECT password, email,name FROM users WHERE email = ?`
+    try{
+     databaseConnect.query(sql,email,async(e, response)=>{
+      console.log(response[0])
+        if(e) {console.log(e)
+          return res.status(500).json({ msg: 'Erro interno no servidor' });
+        }
+      if(!response[0].email || response[0].email === null || !response[0].password ||response[0].password.lenght ===0){
+       return  res.status(404).send('Email ou senha inválida')
+      }
+     
+
+       const isMatchPassword = await ComparePassword(req.body.password, response[0].password)
+          
+         if(isMatchPassword)
+        {
+          const token = await generateToken(response[0].name)
+          res.set('x-access-token', token)
+          console.log(token)
+          
+         return  res.status(200).json({msg:"Tudo correto, Logando", token})
+        }
+        else
+        {
+         return res.status(400).json({msg: 'Erro na requisição, Senha ou email incorretos'})
+        } 
+      })
+
+    } catch(e){
+      console.log(e)
     }
   }
   static async registerAuth(req, res) {
     try {
-      let { name,password, age, number, address } = req.body;
+      let { name,password, email, number, address } = req.body;
       if(!password) return res.status(400).send('Senha não inserida ou inválida' + password)
       password = await EncryptPassword(password)
-      const user = new User(name, age, number, address, password);
+      const user = new User(name, password, email, number, address  );
       await user.Create();
       res.status(200).json({ msg: `Usuário criado ${user.name} ${user.id}` });
 

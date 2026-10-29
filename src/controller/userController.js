@@ -1,7 +1,6 @@
 import databaseConnect from "../cfg/dbConnect.js";
 import User from "../models/User.js";
-import express from 'express'
-import {generateToken} from "../cfg/jwToken.js";
+import {generateToken, tokenValidate} from "../cfg/jwToken.js";
 import {EncryptPassword, ComparePassword} from "../cfg/bcryptHash.js";
 class UserController {
   static async customerLogin(req, res) {
@@ -23,9 +22,7 @@ class UserController {
          if(isMatchPassword)
         {
           const token = await generateToken(response[0].name)
-          res.set('x-access-token', token)
-          console.log(token)
-          
+          res.set('authorization', token)
          return  res.status(200).json({msg:"Tudo correto, Logando", token})
         }
         else

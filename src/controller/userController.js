@@ -1,18 +1,17 @@
 import databaseConnect from "../cfg/dbConnect.js";
 import User from "../models/User.js";
-import {generateToken, tokenValidate} from "../cfg/jwToken.js";
+import {generateToken} from "../cfg/jwToken.js";
 import {EncryptPassword, ComparePassword} from "../cfg/bcryptHash.js";
 class UserController {
   static async customerLogin(req, res) {
     const email = req.body.email
-    const sql = `SELECT password, email,name FROM users WHERE email = ?`
+    const sql = `SELECT * FROM users WHERE email = ?`
     try{
      databaseConnect.query(sql,email,async(e, response)=>{
-      console.log(response[0])
         if(e) {console.log(e)
           return res.status(500).json({ msg: 'Erro interno no servidor' });
         }
-      if(!response[0].email || response[0].email === null || !response[0].password ||response[0].password.lenght ===0){
+      if(!response[0].email || response[0].email === null || !response[0].password ||response[0].password.length ===0){
        return  res.status(404).send('Email ou senha inválida')
       }
      
@@ -21,7 +20,7 @@ class UserController {
           
          if(isMatchPassword)
         {
-          const token = await generateToken(response[0].name)
+          const token = await generateToken(response)
           res.set('authorization', token)
          return  res.status(200).json({msg:"Tudo correto, Logando", token})
         }
@@ -32,7 +31,8 @@ class UserController {
       })
 
     } catch(e){
-      console.log(e)
+      res.status(500).send('Erro interno de servidor')
+
     }
   }
   static async registerAuth(req, res) {
@@ -67,7 +67,7 @@ class UserController {
   }
 
   static async getUserByID(req,res){
-    const id = req.params.id
+    const id = req.user.user[0].id
     try{
       const sql = `SELECT * FROM users WHERE id = ?`
       databaseConnect.query(sql,id, (e, result)=>{

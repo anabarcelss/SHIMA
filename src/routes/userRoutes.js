@@ -6,7 +6,7 @@ const routes = express.Router();
 routes.post("/register", UserController.registerAuth);
 routes.post('/login', UserController.customerLogin)
 routes.get("/users", tokenValidate,UserController.getAllUsers);
-routes.get("/users/:id", tokenValidate ,UserController.getUserByID);
+routes.get("/user", tokenValidate ,UserController.getUserByID);
 routes.put('/users/:id', UserController.updateUser)
 routes.delete('/users/delete/:id', UserController.deleteUser)
 export default routes;

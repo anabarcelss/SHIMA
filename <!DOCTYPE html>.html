@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIMA Oriental - Propostas de Redesign de Logótipo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Serif JP / Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        cinzel: ['Cinzel', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            red: '#E62E2D',
+                            crimson: '#9E1B1B',
+                            dark: '#121214',
+                            gold: '#D4AF37',
+                            sand: '#F9F8F6',
+                            cardBg: '#1A1A1E'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .preview-canvas {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bg-pattern-dots {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+        .dark .bg-pattern-dots {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+        }
+        .svg-container svg {
+            width: 100%;
+            height: auto;
+            max-height: 220px;
+        }
+    </style>
+</head>
+<body class="bg-brand-sand text-slate-800 antialiased min-h-screen font-sans selection:bg-brand-red selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-brand-red flex items-center justify-center text-white font-bold text-xs tracking-wider">
+                    島
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-lg leading-none">SHIMA Oriental</h1>
+                    <p class="text-xs text-slate-500 font-medium">Estudo de Redesign & Identidade Visual</p>
+                </div>
+            </div>
+
+            <!-- Context Controls -->
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-slate-500 hidden sm:inline mr-1">Fundo de Visualização:</span>
+                <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 border border-slate-200">
+                    <button onclick="setTheme('light')" id="btn-light" class="theme-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-white text-slate-900 shadow-sm">
+                        ☀️ Claro
+                    </button>
+                    <button onclick="setTheme('dark')" id="btn-dark" class="theme-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 hover:text-slate-900">
+                        🌙 Escuro
+                    </button>
+                    <button onclick="setTheme('mockup')" id="btn-mockup" class="theme-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 hover:text-slate-900">
+                        ✨ Textura Premium
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+        <!-- Intro Banner -->
+        <section class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-red/5 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="max-w-3xl">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-brand-red/10 text-brand-red mb-3">
+                    Análise & Diagnóstico Visual
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 tracking-tight">
+                    Evolução de Identidade: De Genérico a Memorável
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    O logótipo original do restaurante <strong>SHIMA Oriental</strong> possui boa leitura inicial, contudo utiliza uma combinação de elementos amplamente difusa no mercado (sol vermelho + hashis transversais). Abaixo apresentamos o conceito original recriado e <strong>3 propostas de refinamento estratégico</strong> que elevam o valor percetível da marca.
+                </p>
+            </div>
+        </section>
+
+        <!-- GRID DE COMPARATIVO -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- LOGO ORIGINAL -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col transition-all hover:shadow-md">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Versão Atual</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">Base</span>
+                </div>
+                <!-- SVG Canvas Container -->
+                <div class="preview-canvas bg-white p-8 flex items-center justify-center min-h-[240px] border-b border-slate-100 bg-pattern-dots" id="canvas-original">
+                    <div class="svg-container w-full flex justify-center">
+                        <!-- ORIGINAL SVG RECREATION -->
+                        <svg viewBox="0 0 340 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Red Sun -->
+                            <circle cx="85" cy="70" r="45" fill="#E62E2D" />
+                            <!-- Hashis -->
+                            <line x1="40" y1="105" x2="118" y2="25" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="48" y1="113" x2="126" y2="33" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+                            <!-- White Gap Effect on chopsticks -->
+                            <line x1="57" y1="95" x2="105" y2="45" stroke="#E62E2D" stroke-width="2.5"/>
+                            <line x1="64" y1="101" x2="112" y2="51" stroke="#E62E2D" stroke-width="2.5"/>
+                            <!-- Text Block -->
+                            <text x="150" y="68" fill="#1A1A1A" font-family="system-ui, sans-serif" font-weight="800" font-size="34" letter-spacing="3">SHIMA</text>
+                            <text x="152" y="90" fill="#1A1A1A" font-family="system-ui, sans-serif" font-weight="600" font-size="10" letter-spacing="5">ORIENTAL</text>
+                            <line x1="236" y1="87" x2="260" y2="87" stroke="#E62E2D" stroke-width="2"/>
+                            <text x="268" y="91" fill="#1A1A1A" font-family="sans-serif" font-weight="600" font-size="12">東部</text>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Analysis Content -->
+                <div class="p-5 flex-1 flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Original (Atual)</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Uso literal e direto do sol com hashis. Elementos secundários (linhas e kanjis) fragmentados.
+                        </p>
+                        <div class="space-y-1.5 mb-4">
+                            <div class="flex items-center text-[11px] text-amber-700 font-medium">
+                                <span class="mr-1.5">⚠️</span> Cliché visual pronunciado
+                            </div>
+                            <div class="flex items-center text-[11px] text-amber-700 font-medium">
+                                <span class="mr-1.5">⚠️</span> Pouca diferenciação de mercado
+                            </div>
+                            <div class="flex items-center text-[11px] text-slate-600">
+                                <span class="mr-1.5">ℹ️</span> Kanjis signficam "Região Leste"
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('original')" class="w-full py-2 px-3 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
+                        Ver Diagnóstico Completo
+                    </button>
+                </div>
+            </div>
+
+            <!-- OPÇÃO 1: SUMI-E ARTÍSTICO -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col transition-all hover:shadow-md relative">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-red">Opção 1</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-red-50 text-brand-red">Sumi-e & Orgânico</span>
+                </div>
+                <!-- SVG Canvas Container -->
+                <div class="preview-canvas bg-white p-8 flex items-center justify-center min-h-[240px] border-b border-slate-100 bg-pattern-dots" id="canvas-opt1">
+                    <div class="svg-container w-full flex justify-center">
+                        <svg viewBox="0 0 340 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Dynamic Brush Sun (Enso/Sumi-e Style) -->
+                            <path d="M 85 22 C 115 22, 132 40, 130 68 C 128 98, 105 118, 76 116 C 50 114, 34 92, 38 65 C 42 38, 62 23, 85 22 Z" fill="#E62E2D" opacity="0.92" />
+                            <circle cx="85" cy="69" r="42" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 4" opacity="0.25"/>
+                            <!-- Abstract Hashi/Bamboo strokes (Minimalist) -->
+                            <path d="M 45 105 L 118 32" stroke="#121214" stroke-width="4.5" stroke-linecap="round"/>
+                            <path d="M 55 112 L 128 39" stroke="#121214" stroke-width="3.5" stroke-linecap="round"/>
+                            <circle cx="118" cy="32" r="2" fill="#D4AF37"/>
+                            <!-- Typo -->
+                            <text x="148" y="66" fill="#121214" font-family="'Shippori Mincho', serif" font-weight="700" font-size="33" letter-spacing="4">SHIMA</text>
+                            <text x="150" y="88" fill="#666666" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="9.5" letter-spacing="6">CULINÁRIA ORIENTAL</text>
+                            <!-- Elegant Red Stamp (Hanko) for Kanji -->
+                            <rect x="290" y="44" width="22" height="22" rx="4" fill="#E62E2D"/>
+                            <text x="301" y="60" fill="#FFFFFF" font-family="'Shippori Mincho', serif" font-size="12" font-weight="bold" text-anchor="middle">島</text>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Analysis Content -->
+                <div class="p-5 flex-1 flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Artístico & Tradicional</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Utiliza o conceito do <em>Ensō</em> (círculo de pincelada zen) com o carimbo tradicional japonês (Hanko), promovendo autenticidade cultural.
+                        </p>
+                        <div class="space-y-1.5 mb-4">
+                            <div class="flex items-center text-[11px] text-emerald-700 font-medium">
+                                <span class="mr-1.5">✓</span> Textura artesanal e sofisticada
+                            </div>
+                            <div class="flex items-center text-[11px] text-emerald-700 font-medium">
+                                <span class="mr-1.5">✓</span> Kanji "Shima" (Ilha) integrado em selo
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('opt1')" class="w-full py-2 px-3 text-xs font-semibold text-brand-red bg-red-50 hover:bg-red-100/80 border border-red-200 rounded-lg transition-colors">
+                        Ver Detalhes do Design
+                    </button>
+                </div>
+            </div>
+
+            <!-- OPÇÃO 2: MODERNA & GEOMÉTRICA -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col transition-all hover:shadow-md relative">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-900">Opção 2</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-800">Geométrica & Clean</span>
+                </div>
+                <!-- SVG Canvas Container -->
+                <div class="preview-canvas bg-white p-8 flex items-center justify-center min-h-[240px] border-b border-slate-100 bg-pattern-dots" id="canvas-opt2">
+                    <div class="svg-container w-full flex justify-center">
+                        <svg viewBox="0 0 340 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Masked Cutout Circle Concept -->
+                            <g>
+                                <!-- Main Red Circle -->
+                                <circle cx="80" cy="70" r="42" fill="#E62E2D" />
+                                <!-- Negative Space Cuts for Hashi (Minimalist) -->
+                                <path d="M 45 105 L 115 35" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" class="theme-cutout"/>
+                                <path d="M 55 113 L 123 45" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" class="theme-cutout"/>
+                                <!-- Inner Precision Sticks -->
+                                <path d="M 45 105 L 115 35" stroke="#121214" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M 55 113 L 123 45" stroke="#121214" stroke-width="2" stroke-linecap="round"/>
+                            </g>
+                            <!-- Balanced Modern Typography -->
+                            <text x="145" y="65" fill="#121214" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="34" letter-spacing="4">SHIMA</text>
+                            <text x="147" y="86" fill="#71717A" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="9" letter-spacing="7">GASTRONOMIA ORIENTAL</text>
+                            <!-- Subtle Divider -->
+                            <rect x="147" y="96" width="30" height="2" fill="#E62E2D"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Analysis Content -->
+                <div class="p-5 flex-1 flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Moderna & Geométrica</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Recorta o sol vermelho através de espaço negativo inteligente. Proporciona excelente legibilidade em pequenas dimensões e aplicações digitais.
+                        </p>
+                        <div class="space-y-1.5 mb-4">
+                            <div class="flex items-center text-[11px] text-emerald-700 font-medium">
+                                <span class="mr-1.5">✓</span> Espaço negativo contemporâneo
+                            </div>
+                            <div class="flex items-center text-[11px] text-emerald-700 font-medium">
+                                <span class="mr-1.5">✓</span> Elevada escalabilidade em app/ícones
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('opt2')" class="w-full py-2 px-3 text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg transition-colors">
+                        Ver Detalhes do Design
+                    </button>
+                </div>
+            </div>
+
+            <!-- OPÇÃO 3: FINE DINING & LUXO -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col transition-all hover:shadow-md relative">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Opção 3</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-700">Premium & Luxo</span>
+                </div>
+                <!-- SVG Canvas Container -->
+                <div class="preview-canvas bg-white p-8 flex items-center justify-center min-h-[240px] border-b border-slate-100 bg-pattern-dots" id="canvas-opt3">
+                    <div class="svg-container w-full flex justify-center">
+                        <svg viewBox="0 0 340 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Refined Fine Ring with Crimson Sun -->
+                            <circle cx="75" cy="70" r="38" fill="#9E1B1B"/>
+                            <circle cx="75" cy="70" r="46" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="60 5"/>
+                            <!-- Gold Geometric Chopsticks Accent -->
+                            <path d="M 40 102 L 105 37" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M 48 110 L 113 45" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                            <!-- Kanji Center Overlay -->
+                            <text x="75" y="75" fill="#FFFFFF" font-family="'Shippori Mincho', serif" font-size="18" text-anchor="middle" opacity="0.9">東</text>
+                            <!-- Premium Serif Typography -->
+                            <text x="145" y="65" fill="#121214" font-family="'Cinzel', serif" font-weight="600" font-size="31" letter-spacing="5">SHIMA</text>
+                            <text x="147" y="86" fill="#9E1B1B" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="8.5" letter-spacing="6">JAPANESE CUISINE</text>
+                            <text x="147" y="100" fill="#D4AF37" font-family="'Cinzel', serif" font-size="8" letter-spacing="3">EST. 2024</text>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Analysis Content -->
+                <div class="p-5 flex-1 flex flex-col justify-between bg-slate-50/50">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Premium & Fine Dining</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            Paleta carmesim e dourada com tipografia serifada de alta classe. Ideal para posicionamento de restaurante sofisticado e exclusivo.
+                        </p>
+                        <div class="space-y-1.5 mb-4">
+                            <div class="flex items-center text-[11px] text-emerald-700 font-medium">
+                                <span class="mr-1.5">✓</span> Posicionamento de alto valor
+                            </div>
+                            <div class="flex items-center text-[11px] text-emerald-700 font-medium">
+                                <span class="mr-1.5">✓</span> Detalhes requintados em dourado
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('opt3')" class="w-full py-2 px-3 text-xs font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg transition-colors">
+                        Ver Detalhes do Design
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO DE MOCKUPS & APLICAÇÕES PRÁTICAS -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Simulação de Aplicação no Mundo Real</h3>
+                    <p class="text-xs sm:text-sm text-slate-500">Veja como cada conceito se comporta no uniforme do Chef, fachada e packaging.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="switchMockup('facade')" id="tab-facade" class="mockup-tab px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-slate-900 text-white">
+                        🏢 Fachada / Letreiro
+                    </button>
+                    <button onclick="switchMockup('card')" id="tab-card" class="mockup-tab px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200">
+                        💳 Cartão de Visita
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Box for Mockups -->
+            <div id="mockup-display" class="w-full h-80 rounded-xl bg-slate-950 p-8 flex items-center justify-center relative overflow-hidden transition-all border border-slate-800">
+                <!-- Background ambient texture -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-black via-slate-900 to-zinc-900 opacity-90"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(#e62e2d_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+                
+                <div class="relative z-10 text-center max-w-lg mx-auto">
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-brand-gold mb-2 block">Pré-visualização de fachada iluminada</span>
+                    <!-- Active Mockup SVG Insert -->
+                    <div id="mockup-svg-target" class="py-4">
+                        <!-- Loaded dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal de Análise Detalhada -->
+    <div id="modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+            <div class="p-6 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-md z-10">
+                <h3 id="modal-title" class="text-xl font-bold text-slate-900">Análise Detalhada</h3>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 font-bold">
+                    ✕
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 space-y-4 text-slate-600 text-sm leading-relaxed">
+                <!-- Conteúdo preenchido dinamicamente por JS -->
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800 transition-colors">
+                    Fechar Diagnóstico
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript para Interatividade -->
+    <script>
+        // Dados de Diagnóstico para cada opção
+        const dataDetails = {
+            original: {
+                title: "Diagnóstico: Logótipo Original",
+                html: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-amber-50 rounded-xl border border-amber-200 text-amber-900">
+                            <h4 class="font-bold mb-1 text-base">Pontos Críticos Identificados</h4>
+                            <p class="text-xs leading-normal">O logotipo possui apelo visual limpo, contudo apresenta fragilidades em termos de diferenciação e equilíbrio de marca.</p>
+                        </div>
+                        <ul class="space-y-3 text-xs">
+                            <li class="flex gap-2">
+                                <span class="text-amber-600 font-bold">1. Saturado no Mercado:</span>
+                                <span>A combinação de um círculo vermelho (referência direta à bandeira do Japão) atravessado por dois hashis é o recurso gráfico mais comum em restaurantes orientais de bairro.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-amber-600 font-bold">2. Desequilíbrio de Texto:</span>
+                                <span>A palavra "ORIENTAL" fica excessivamente pequena em comparação com "SHIMA", e o traço vermelho de ligação cria uma interrupção visual desnecessária antes dos ideogramas kanji.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-amber-600 font-bold">3. Leitura dos Kanjis:</span>
+                                <span>Os caracteres 東部 significam literalmente "Parte Leste/Oriental", o que é uma tradução literal secundária. Reduzidos, perdem definição em bordados ou impressão gráfica menor.</span>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            },
+            opt1: {
+                title: "Análise: Opção 1 - Sumi-e & Orgânico",
+                html: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 rounded-xl border border-red-200 text-red-950">
+                            <h4 class="font-bold mb-1 text-base">Conceito: Tradição & Arte Manual</h4>
+                            <p class="text-xs">Inspirado na técnica milenar da pintura a tinta de china (Sumi-e) e no círculo Zen (Ensō).</p>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Principais Melhorias:</h4>
+                        <ul class="space-y-2 text-xs">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Carácter Único:</strong> O sol deixa de ser um círculo perfeito vetorizado e ganha vida como uma pincelada orgânica, transmitindo frescura e preparação artesanal.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Selo Hanko (島):</strong> O kanji de "SHIMA" (Ilha) é incorporado dentro de um carimbo vermelho tradicional japonês, conferindo chancela de autor e autenticidade.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Tipografia Serifada com Identidade:</strong> A tipografia Mincho atribui um toque poético e gastronómico refinado.</span>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            },
+            opt2: {
+                title: "Análise: Opção 2 - Geométrica & Clean",
+                html: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-100 rounded-xl border border-slate-300 text-slate-900">
+                            <h4 class="font-bold mb-1 text-base">Conceito: Minimalismo Contemporâneo</h4>
+                            <p class="text-xs">Focado na máxima legibilidade, versatilidade digital e uso inteligente do espaço negativo.</p>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Principais Melhorias:</h4>
+                        <ul class="space-y-2 text-xs">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Recorte em Espaço Negativo:</strong> Em vez de colocar os hashis por cima do sol de forma ingénua, a forma do sol é interrompida pelo contorno dos hashis, criando um efeito gestáltico moderno.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Versatilidade Digital:</strong> Funciona perfeitamente em ícones de aplicações móveis (UberEats, Glovo, Instagram) sem perder detalhes.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Hierarquia Limpa:</strong> Subtítulo alargado em caixas altas com espaçamento moderno para transmitir equilíbrio.</span>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            },
+            opt3: {
+                title: "Análise: Opção 3 - Premium & Luxo",
+                html: `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-amber-50 rounded-xl border border-amber-200 text-amber-950">
+                            <h4 class="font-bold mb-1 text-base">Conceito: Alta Gastronomia & Exclusividade</h4>
+                            <p class="text-xs">Concebido para posicionar o restaurante num segmento de preço e experiência superior (Omakase / Fine Dining).</p>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Principais Melhorias:</h4>
+                        <ul class="space-y-2 text-xs">
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Paleta Nobre:</strong> A transição para o vermelho carmesim profundo e detalhes a dourado metálico eleva imediatamente o status percebido da marca.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Selo de Excelência:</strong> O anel exterior com detalhes técnicos e o ideograma centralizado transmite tradição e rigor técnico na cozinha.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-emerald-600 font-bold">✓</span>
+                                <span><strong>Tipografia Neoclássica:</strong> A fonte Cinzel proporciona elegância atemporal para ementas de luxo e sinalética sofisticada.</span>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        // Alterar tema de fundo das telas dos logos
+        function setTheme(theme) {
+            const canvases = [
+                document.getElementById('canvas-original'),
+                document.getElementById('canvas-opt1'),
+                document.getElementById('canvas-opt2'),
+                document.getElementById('canvas-opt3')
+            ];
+
+            const buttons = document.querySelectorAll('.theme-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-white', 'bg-slate-900', 'text-white', 'text-slate-900', 'shadow-sm');
+                btn.classList.add('text-slate-600');
+            });
+
+            canvases.forEach(canvas => {
+                const cutouts = canvas.querySelectorAll('.theme-cutout');
+                
+                if (theme === 'dark') {
+                    canvas.className = "preview-canvas bg-slate-950 p-8 flex items-center justify-center min-h-[240px] border-b border-slate-800 bg-pattern-dots text-white";
+                    document.getElementById('btn-dark').classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+                    // Adjust SVG texts for dark mode visibility
+                    canvas.querySelectorAll('text').forEach(t => {
+                        if (t.getAttribute('fill') === '#1A1A1A' || t.getAttribute('fill') === '#121214') {
+                            t.setAttribute('data-orig-fill', t.getAttribute('fill'));
+                            t.setAttribute('fill', '#FFFFFF');
+                        }
+                    });
+                    canvas.querySelectorAll('path, line').forEach(l => {
+                        if (l.getAttribute('stroke') === '#1A1A1A' || l.getAttribute('stroke') === '#121214') {
+                            l.setAttribute('data-orig-stroke', l.getAttribute('stroke'));
+                            l.setAttribute('stroke', '#FFFFFF');
+                        }
+                    });
+                    cutouts.forEach(c => c.setAttribute('stroke', '#020617'));
+
+                } else if (theme === 'mockup') {
+                    canvas.className = "preview-canvas bg-gradient-to-br from-amber-950/20 via-stone-900 to-black p-8 flex items-center justify-center min-h-[240px] border-b border-stone-800 text-white";
+                    document.getElementById('btn-mockup').classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+                    canvas.querySelectorAll('text').forEach(t => {
+                        if (t.getAttribute('fill') === '#1A1A1A' || t.getAttribute('fill') === '#121214') {
+                            t.setAttribute('fill', '#F5F5F4');
+                        }
+                    });
+                    canvas.querySelectorAll('path, line').forEach(l => {
+                        if (l.getAttribute('stroke') === '#1A1A1A' || l.getAttribute('stroke') === '#121214') {
+                            l.setAttribute('stroke', '#F5F5F4');
+                        }
+                    });
+                    cutouts.forEach(c => c.setAttribute('stroke', '#1c1917'));
+
+                } else {
+                    // Light theme (Default)
+                    canvas.className = "preview-canvas bg-white p-8 flex items-center justify-center min-h-[240px] border-b border-slate-100 bg-pattern-dots";
+                    document.getElementById('btn-light').classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+                    canvas.querySelectorAll('text').forEach(t => {
+                        if (t.hasAttribute('data-orig-fill')) {
+                            t.setAttribute('fill', t.getAttribute('data-orig-fill'));
+                        } else if (t.getAttribute('fill') === '#FFFFFF' && t.textContent.includes('SHIMA')) {
+                            t.setAttribute('fill', '#121214');
+                        }
+                    });
+                    canvas.querySelectorAll('path, line').forEach(l => {
+                        if (l.hasAttribute('data-orig-stroke')) {
+                            l.setAttribute('stroke', l.getAttribute('data-orig-stroke'));
+                        } else if (l.getAttribute('stroke') === '#FFFFFF' && !l.classList.contains('theme-cutout')) {
+                            l.setAttribute('stroke', '#121214');
+                        }
+                    });
+                    cutouts.forEach(c => c.setAttribute('stroke', '#FFFFFF'));
+                }
+            });
+        }
+
+        // Mockups Switcher
+        function switchMockup(type) {
+            const target = document.getElementById('mockup-svg-target');
+            const tabs = document.querySelectorAll('.mockup-tab');
+            tabs.forEach(t => {
+                t.classList.remove('bg-slate-900', 'text-white');
+                t.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            if (type === 'facade') {
+                document.getElementById('tab-facade').classList.add('bg-slate-900', 'text-white');
+                target.innerHTML = `
+                    <div class="p-6 rounded-xl border border-gold/30 bg-black/60 shadow-2xl backdrop-blur">
+                        <svg viewBox="0 0 340 100" fill="none" class="w-72 sm:w-96 mx-auto">
+                            <!-- Glowing Effect mockup -->
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                            <g filter="url(#glow)">
+                                <path d="M 45 75 C 68 20, 105 20, 120 50 C 110 85, 60 90, 45 75 Z" fill="#E62E2D" opacity="0.9"/>
+                                <path d="M 35 80 L 108 15" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M 45 87 L 118 22" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+                                <text x="140" y="52" fill="#FFFFFF" font-family="'Shippori Mincho', serif" font-weight="700" font-size="30" letter-spacing="4">SHIMA</text>
+                                <text x="142" y="70" fill="#D4AF37" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="8" letter-spacing="5">GASTRONOMIA ORIENTAL</text>
+                            </g>
+                        </svg>
+                    </div>
+                `;
+            } else {
+                document.getElementById('tab-card').classList.add('bg-slate-900', 'text-white');
+                target.innerHTML = `
+                    <div class="w-80 h-44 mx-auto bg-stone-900 rounded-lg p-6 border border-stone-800 shadow-2xl flex flex-col justify-between text-left relative overflow-hidden">
+                        <div class="absolute -right-8 -bottom-8 w-28 h-28 bg-brand-red/10 rounded-full blur-xl"></div>
+                        <div class="flex justify-between items-start">
+                            <svg viewBox="0 0 140 50" fill="none" class="w-24">
+                                <circle cx="25" cy="25" r="18" fill="#E62E2D" />
+                                <path d="M 10 38 L 40 12" stroke="#FFF" stroke-width="2"/>
+                                <text x="50" y="28" fill="#FFF" font-family="sans-serif" font-weight="bold" font-size="14" letter-spacing="2">SHIMA</text>
+                            </svg>
+                            <rect x="230" y="0" width="20" height="20" fill="#D4AF37" opacity="0.2"/>
+                        </div>
+                        <div>
+                            <p class="text-white text-xs font-semibold tracking-wide">KENJI TAKAHASHI</p>
+                            <p class="text-[9px] text-stone-400 uppercase tracking-widest">Chef Executivo</p>
+                            <p class="text-[8px] text-brand-gold mt-2 font-mono">+351 912 345 678 • Lisboa</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Functions for Modal
+        function openModal(key) {
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            if (dataDetails[key]) {
+                title.textContent = dataDetails[key].title;
+                body.innerHTML = dataDetails[key].html;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        // Initialize Mockup on load
+        window.onload = function() {
+            switchMockup('facade');
+        };
+    </script>
+</body>
+</html>

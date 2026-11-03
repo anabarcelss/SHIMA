@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#141414" />
+  <meta name="description"
+    content="SHIMA Oriental — Combinados, Temaki, Yakissoba, Bolinha de Salmão e Monte seu Combo. Peça online para delivery ou retirada." />
+  <title>SHIMA Oriental — 和食 | Delivery &amp; Cardápio Online</title>
+  <link rel="icon" type="image/svg+xml" href="assets/simbolo-solar.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- Barra de inspeção (visível apenas se ?preview=4telas estiver na URL) -->
+  <header id="protoSwitcher" class="proto-switcher" hidden>
+    <span class="proto-switcher-label">SHIMA ORIENTAL · 4 TELAS:</span>
+    <div class="proto-tabs">
+      <button type="button" class="proto-tab active" data-target="screen-1" onclick="goToScreen('screen-1')">
+        1. Apresentação
+      </button>
+      <button type="button" class="proto-tab" data-target="screen-2" onclick="goToScreen('screen-2')">
+        2. Cadastro
+      </button>
+      <button type="button" class="proto-tab" data-target="screen-3" onclick="goToScreen('screen-3')">
+        3. Login
+      </button>
+      <button type="button" class="proto-tab" data-target="screen-4" onclick="goToScreen('screen-4')">
+        4. Cardápio + Carrinho
+      </button>
+    </div>
+    <button type="button" id="toggleAllBtn" class="proto-view-mode" onclick="toggleAllScreensMode()">
+      Ver 4 telas lado a lado
+    </button>
+  </header>
+
+  <main id="screensStage" class="screens-stage">
+
+    <!-- ===================================================================
+         TELA 1: APRESENTAÇÃO DOS PRODUTOS (O QUE VENDEMOS)
+         Combinados, Temaki, Yakissoba, Bolinha de Salmão e Monte seu Combo
+    ==================================================================== -->
+    <div class="screen-wrapper active-screen" id="screen-1">
+      <div class="screen-frame-title">
+        <span>01 / APRESENTAÇÃO DOS PRODUTOS</span>
+        <span>390px · MOBILE</span>
+      </div>
+      <section class="mobile-screen" aria-label="Apresentação dos produtos SHIMA Oriental">
+        <!-- Barra de Navegação com o Logo Oficial SHIMA Oriental em SVG -->
+        <nav class="shima-nav">
+          <a href="#inicio" class="brand-logo-link" onclick="goToScreen('screen-1'); return false;"
+            title="SHIMA Oriental Washoku">
+            <img class="brand-logo-img" src="assets/logo-shima-pos.svg" alt="Logo SHIMA Oriental 和食" />
+          </a>
+          <div class="nav-actions">
+            <button type="button" class="btn-ghost-light" id="navLoginBtn" onclick="goToScreen('screen-3')">
+              Entrar
+            </button>
+            <button type="button" class="btn-primary btn-nav-cta" onclick="startOrderFlow('all')">
+              Pedir agora
+            </button>
+          </div>
+        </nav>
+
+        <!-- Hero -->
+        <div class="hero-image-box">
+          <img src="assets/hero-niguiris.png" alt="Sushi e Niguiris da casa SHIMA" />
+          <span class="hero-tag-overlay">
+            <span>SHIMA ORIENTAL</span>
+            <span style="color:#950606;">—</span>
+            <span style="font-family:var(--font-jp); font-size:11px;">和食</span>
+          </span>
+        </div>
+
+        <div class="hero-body">
+          <div class="logo-signature-kicker">
+            <span>SEU PRÓXIMO SUSHI TÁ AQUI</span>
+            <span class="sig-dash"></span>
+            <span class="sig-jp">和食</span>
+          </div>
+          <h1 class="hero-title">Bateu a fome?<br />Vai de SHIMA.</h1>
+          <p class="hero-desc">
+            Do primeiro niguiri ao último uramaki. Conheça o que vendemos preparado na hora: combinados, temaki,
+            yakissoba, bolinha de salmão e montagem livre.
+          </p>
+          <button type="button" class="btn-primary hero-cta-full" onclick="startOrderFlow('all')">
+            <span>Pedir agora</span>
+            <span>↗</span>
+          </button>
+          <div class="badges-row">
+            <span class="badge-pill">Ter – Dom · 19h às 23h00</span>
+            <span class="badge-pill">Vitória-ES</span>
+            <span class="badge-pill">Delivery &amp; Retirada</span>
+          </div>
+        </div>
+
+        <!-- O Que Vendemos: As 5 Especialidades SHIMA -->
+        <div class="section-block" id="o-que-vendemos">
+          <div>
+            <div class="logo-signature-kicker" style="margin-bottom: 6px;">
+              <span>O QUE VENDEMOS</span>
+              <span class="sig-dash"></span>
+              <span class="sig-jp">和食</span>
+            </div>
+            <h2 class="section-heading">Cinco jeitos de matar a sua fome.</h2>
+            <p class="section-sub">
+              Toque em qualquer especialidade abaixo para iniciar seu pedido.
+            </p>
+          </div>
+
+          <div class="showcase-list">
+            <!-- 1. Combinados -->
+            <article class="showcase-card" onclick="startOrderFlow('combinados')">
+              <div class="showcase-card-img">
+                <img src="assets/combinados.png" alt="Combinados SHIMA" loading="lazy" />
+                <span class="showcase-badge red">MAIS PEDIDO</span>
+              </div>
+              <div class="showcase-card-body">
+                <div class="showcase-card-header">
+                  <h3 class="showcase-card-title">1. Combinados</h3>
+                  <span class="showcase-card-price">A partir de R$ 86</span>
+                </div>
+                <p class="showcase-card-desc">
+                  Seleções prontas e equilibradas de niguiris, sashimis, uramakis e hossomakis para pedir individual ou
+                  compartilhar.
+                </p>
+                <span class="showcase-card-link">Pedir combinados ↗</span>
+              </div>
+            </article>
+
+            <!-- 2. Temaki -->
+            <article class="showcase-card" onclick="startOrderFlow('temaki')">
+              <div class="showcase-card-img">
+                <img src="assets/temaki.jpg" alt="Temaki de Salmão SHIMA" loading="lazy" />
+                <span class="showcase-badge">ALGA SEMPRE CROCANTE</span>
+              </div>
+              <div class="showcase-card-body">
+                <div class="showcase-card-header">
+                  <h3 class="showcase-card-title">2. Temaki</h3>
+                  <span class="showcase-card-price">A partir de R$ 36</span>
+                </div>
+                <p class="showcase-card-desc">
+                  Cone de alga nori crocante enrolado na hora, recheado até a base com salmão fresco em cubos, cream
+                  cheese, cebolinha e gergelim.
+                </p>
+                <span class="showcase-card-link">Pedir temaki ↗</span>
+              </div>
+            </article>
+
+            <!-- 3. Yakissoba -->
+            <article class="showcase-card" onclick="startOrderFlow('yakissoba')">
+              <div class="showcase-card-img">
+                <img src="assets/yakissoba.jpg" alt="Yakissoba Artesanal SHIMA" loading="lazy" />
+                <span class="showcase-badge">DIRETO DA WOK</span>
+              </div>
+              <div class="showcase-card-body">
+                <div class="showcase-card-header">
+                  <h3 class="showcase-card-title">3. Yakissoba</h3>
+                  <span class="showcase-card-price">A partir de R$ 54</span>
+                </div>
+                <p class="showcase-card-desc">
+                  Macarrão oriental dourado na chapa com legumes crocantes, cogumelos shiitake e nosso molho artesanal à
+                  base de shoyu e óleo de gergelim.
+                </p>
+                <span class="showcase-card-link">Pedir yakissoba ↗</span>
+              </div>
+            </article>
+
+            <!-- 4. Bolinha de Salmão -->
+            <article class="showcase-card" onclick="startOrderFlow('bolinha')">
+              <div class="showcase-card-img">
+                <img src="assets/bolinha-salmao.jpg" alt="Bolinha de Salmão Crocante" loading="lazy" />
+                <span class="showcase-badge red">ENTRADA FAVORITA</span>
+              </div>
+              <div class="showcase-card-body">
+                <div class="showcase-card-header">
+                  <h3 class="showcase-card-title">4. Bolinha de Salmão</h3>
+                  <span class="showcase-card-price">A partir de R$ 34</span>
+                </div>
+                <p class="showcase-card-desc">
+                  Bolinhas douradas empanadas na panko, super crocantes por fora e recheadas com salmão temperado e
+                  cream cheese, servidas com tarê.
+                </p>
+                <span class="showcase-card-link">Pedir bolinha de salmão ↗</span>
+              </div>
+            </article>
+
+            <!-- 5. Monte seu Combo -->
+            <article class="showcase-card monte-highlight-card" onclick="startOrderFlow('monte')">
+              <div class="showcase-card-img">
+                <img src="assets/sushi-destaque.png" alt="Monte seu Combo SHIMA" loading="lazy" />
+                <span class="showcase-badge red">DO SEU JEITO · PEÇA A PEÇA</span>
+              </div>
+              <div class="showcase-card-body">
+                <div class="showcase-card-header">
+                  <h3 class="showcase-card-title">5. Monte seu Combo</h3>
+                  <span class="showcase-card-price">Personalizado</span>
+                </div>
+                <p class="showcase-card-desc">
+                  Escolha exatamente quantas peças quer de cada família: Niguiri, Sashimi, Joy, Hossomaki, Uramaki e Hot
+                  Roll.
+                </p>
+                <div class="monte-mini-thumbs">
+                  <img src="assets/niguiri.png" alt="Niguiri" title="Niguiri" />
+                  <img src="assets/sashimi.png" alt="Sashimi" title="Sashimi" />
+                  <img src="assets/joy.png" alt="Joy" title="Joy" />
+                  <img src="assets/hossomaki.png" alt="Hossomaki" title="Hossomaki" />
+                  <img src="assets/uramaki.png" alt="Uramaki" title="Uramaki" />
+                  <img src="assets/hot.png" alt="Hot" title="Hot" />
+                </div>
+                <span class="showcase-card-link" style="color: #f6c8c8; margin-top: 10px;">
+                  Começar a montar meu combo ↗
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Chamada de Pedido -->
+        <div class="red-cta-banner">
+          <span class="eyebrow">PEDIDOS ONLINE · DELIVERY E RETIRADA</span>
+          <h3>Bateu a fome?<br />Pede seu SHIMA.</h3>
+          <p>
+            Cadastre seus dados de entrega em menos de 1 minuto ou entre na sua conta para abrir o cardápio completo.
+          </p>
+          <button type="button" class="btn-light-red" onclick="goToScreen('screen-2')">
+            <span>Pedir agora (Criar cadastro)</span>
+            <span>↗</span>
+          </button>
+          <button type="button" class="btn-ghost-dark"
+            style="color: #f5f1e9; border-color: rgba(245,241,233,0.4); width: 100%; padding: 11px;"
+            onclick="goToScreen('screen-3')">
+            Já tenho conta · Fazer login
+          </button>
+        </div>
+
+        <!-- Rodapé com Assinatura Negativa do Logo -->
+        <footer class="shima-footer">
+          <div class="shima-footer-top">
+            <img class="brand-logo-neg-img" src="assets/logo-shima-neg.svg" alt="SHIMA Oriental Negativo" />
+            <span style="font-size: 12px; color: #f5f1e9; font-weight: 600;">@shima.cozinha</span>
+          </div>
+          <p class="shima-footer-meta">
+            Rua Harmonia, 531 · Vila Madalena, São Paulo — SP<br />
+            Ter a Dom · Delivery e Salão · WhatsApp (11) 99531-0531
+          </p>
+          <div class="shima-footer-copy">
+            <span>© 2026 SHIMA ORIENTAL · 和食</span>
+            <a href="#cardapio" onclick="goToScreen('screen-4'); return false;"
+              style="color:#b8b5ae; text-decoration:underline;">Ver Cardápio Direto</a>
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <!-- ===================================================================
+         TELA 2: TELA DE CADASTRO PARA EFETUAR UM PEDIDO
+         (Exibida após clicar em "Pedir agora")
+    ==================================================================== -->
+    <div class="screen-wrapper" id="screen-2">
+      <div class="screen-frame-title">
+        <span>02 / CADASTRO PARA PEDIDO</span>
+        <span>390px · MOBILE</span>
+      </div>
+      <section class="mobile-screen" aria-label="Cadastro para Pedido">
+        <nav class="shima-nav">
+          <a href="#inicio" class="brand-logo-link" onclick="goToScreen('screen-1'); return false;">
+            <img class="brand-logo-img" src="assets/logo-shima-pos.svg" alt="Logo SHIMA Oriental 和食" />
+          </a>
+          <button type="button" class="back-btn" onclick="goToScreen('screen-1')">
+            ← Voltar
+          </button>
+        </nav>
+
+        <header class="auth-header">
+          <div class="auth-header-brand">
+            <span class="auth-step-tag">PASSO 1 DE 2 · IDENTIFICAÇÃO E ENTREGA</span>
+            <img class="auth-header-symbol" src="assets/simbolo-solar.svg" alt="Símbolo Solar SHIMA" />
+          </div>
+          <h1 class="auth-title">Cadastre-se para fazer seu pedido.</h1>
+          <p class="auth-subtitle">
+            Preencha seus dados e endereço para calcularmos a entrega na hora e liberar o cardápio completo.
+          </p>
+        </header>
+
+        <form class="auth-body" id="registerForm" onsubmit="handleRegisterSubmit(event)">
+          <div class="benefit-strip">
+            <img src="assets/logo-shima-pos.svg" alt="SHIMA" style="width: 68px; height: auto;" />
+            <span>Seus dados ficam salvos no seu navegador para pedir combinados, temaki, yakissoba e bolinha de salmão
+              em segundos.</span>
+          </div>
+
+          <p class="form-section-title">01 / Seus dados pessoais</p>
+
+          <div class="form-group">
+            <label class="form-label" for="regName">Nome completo *</label>
+            <input id="regName" class="form-input" type="text" placeholder="Digite seu nome e sobrenome"
+              autocomplete="name" required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="regPhone">WhatsApp / Celular *</label>
+              <input id="regPhone" class="form-input" type="tel" placeholder="(11) 99999-9999" autocomplete="tel"
+                oninput="maskPhone(this)" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regCpf">CPF na nota (opcional)</label>
+              <input id="regCpf" class="form-input" type="text" placeholder="000.000.000-00" oninput="maskCpf(this)" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regEmail">E-mail *</label>
+            <input id="regEmail" class="form-input" type="email" placeholder="voce@email.com" autocomplete="email"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regPass">Criar senha *</label>
+            <input id="regPass" class="form-input" type="password" placeholder="Mínimo de 6 caracteres" minlength="6"
+              autocomplete="new-password" required />
+          </div>
+
+          <p class="form-section-title" style="margin-top: 6px;">02 / Endereço de entrega</p>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="regCep">CEP * <small id="cepStatus"
+                  style="font-weight:400; color:#950606;"></small></label>
+              <input id="regCep" class="form-input" type="text" placeholder="00000-000" autocomplete="postal-code"
+                oninput="handleCepInput(this)" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regBairro">Bairro *</label>
+              <input id="regBairro" class="form-input" type="text" placeholder="Ex.: Vila Madalena" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regStreet">Rua / Avenida *</label>
+            <input id="regStreet" class="form-input" type="text" placeholder="Ex.: Rua Harmonia"
+              autocomplete="street-address" required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="regNumber">Número *</label>
+              <input id="regNumber" class="form-input" type="text" placeholder="Ex.: 531" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regComp">Complemento</label>
+              <input id="regComp" class="form-input" type="text" placeholder="Apto, bloco, casa" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary hero-cta-full" style="margin-top: 6px;">
+            <span>Concluir cadastro e abrir cardápio</span>
+            <span>↗</span>
+          </button>
+
+          <div class="auth-switch-box">
+            <p>Já fez pedido no SHIMA antes?</p>
+            <button type="button" class="btn-outline" onclick="goToScreen('screen-3')">
+              Já tenho conta · Fazer login →
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- ===================================================================
+         TELA 3: TELA DE LOGIN (QUANDO A PESSOA JÁ TEM CONTA)
+    ==================================================================== -->
+    <div class="screen-wrapper" id="screen-3">
+      <div class="screen-frame-title">
+        <span>03 / LOGIN DO CLIENTE</span>
+        <span>390px · MOBILE</span>
+      </div>
+      <section class="mobile-screen" aria-label="Login do Cliente">
+        <nav class="shima-nav">
+          <a href="#inicio" class="brand-logo-link" onclick="goToScreen('screen-1'); return false;">
+            <img class="brand-logo-img" src="assets/logo-shima-pos.svg" alt="Logo SHIMA Oriental 和食" />
+          </a>
+          <button type="button" class="back-btn" onclick="goToScreen('screen-1')">
+            ← Voltar
+          </button>
+        </nav>
+
+        <div class="hero-image-box" style="height: 165px;">
+          <img src="assets/foto-preparo.png" alt="Preparo artesanal SHIMA" />
+          <span class="hero-tag-overlay">
+            <span>CLIENTE SHIMA</span>
+            <span style="color:#950606;">—</span>
+            <span style="font-family:var(--font-jp); font-size:11px;">和食</span>
+          </span>
+        </div>
+
+        <header class="auth-header">
+          <div class="auth-header-brand">
+            <span class="auth-step-tag">BEM-VINDO DE VOLTA</span>
+            <img class="auth-header-symbol" src="assets/simbolo-solar.svg" alt="Símbolo Solar SHIMA" />
+          </div>
+          <h1 class="auth-title">Entre na sua conta.</h1>
+          <p class="auth-subtitle">
+            Acesse seu endereço salvo e vá direto para o cardápio montar seu pedido.
+          </p>
+        </header>
+
+        <form class="auth-body" id="loginForm" onsubmit="handleLoginSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="loginIdentity">E-mail ou WhatsApp *</label>
+            <input id="loginIdentity" class="form-input" type="text" placeholder="voce@email.com ou (11) 99999-9999"
+              autocomplete="username" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginPass">Sua senha *</label>
+            <input id="loginPass" class="form-input" type="password" placeholder="Digite sua senha"
+              autocomplete="current-password" required />
+          </div>
+
+          <div class="form-helper-row">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="checkbox" id="keepLogged" checked /> Manter conectado
+            </label>
+            <button type="button" class="text-link" onclick="handleForgotPassword()">
+              Esqueci minha senha
+            </button>
+          </div>
+
+          <button type="submit" class="btn-primary hero-cta-full" style="margin-top: 4px;">
+            <span>Entrar e ir para o cardápio</span>
+            <span>↗</span>
+          </button>
+
+          <div class="auth-switch-box" style="margin-top: auto;">
+            <p>Primeira vez pedindo no SHIMA?</p>
+            <button type="button" class="btn-outline" onclick="goToScreen('screen-2')">
+              Criar minha conta agora →
+            </button>
+          </div>
+        </form>
+
+        <footer class="shima-footer">
+          <div class="shima-footer-top">
+            <img class="brand-logo-neg-img" src="assets/logo-shima-neg.svg" alt="SHIMA Oriental Negativo"
+              style="height: 36px;" />
+            <span
+              style="font-family:var(--font-signature); font-size:9px; letter-spacing:1.5px; color:#b8b5ae;">AMBIENTE
+              SEGURO</span>
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <!-- ===================================================================
+         TELA 4: CARDÁPIO COMPLETO COM CARRINHO E TODOS OS COMBOS E PRODUTOS
+    ==================================================================== -->
+    <div class="screen-wrapper" id="screen-4">
+      <div class="screen-frame-title">
+        <span>04 / CARDÁPIO + CARRINHO</span>
+        <span>390px · MOBILE</span>
+      </div>
+      <section class="mobile-screen" aria-label="Cardápio Completo e Carrinho">
+        <!-- Topo do Cardápio com o Logo Oficial SHIMA Oriental -->
+        <nav class="shima-nav">
+          <a href="#inicio" class="brand-logo-link" onclick="goToScreen('screen-1'); return false;"
+            title="Voltar para apresentação">
+            <img class="brand-logo-img" src="assets/logo-shima-pos.svg" alt="Logo SHIMA Oriental 和食" />
+          </a>
+          <div class="nav-actions">
+            <button type="button" class="back-btn" onclick="goToScreen('screen-1')" title="Voltar ao início">
+              Início
+            </button>
+            <button type="button" class="cart-pill-btn" onclick="scrollToCart()">
+              <span>Carrinho</span>
+              <span class="cart-count-badge" id="navCartCount">0</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Barra de endereço do cliente logado -->
+        <div class="delivery-address-bar">
+          <div class="delivery-address-text">
+            Olá, <strong id="customerGreetingName">Cliente</strong> · Entrega em <strong id="customerAddressText">Vila
+              Madalena, SP</strong>
+          </div>
+          <button type="button" class="text-link" style="color: #f6c8c8; font-size: 11px; flex-shrink: 0;"
+            onclick="goToScreen('screen-2')">
+            Editar dados
+          </button>
+        </div>
+
+        <!-- Abas de Filtro Rápido das Categorias -->
+        <div class="menu-filter-bar" role="tablist">
+          <button type="button" class="filter-chip active" data-cat="all"
+            onclick="filterMenuCategory('all', this)">Todos</button>
+          <button type="button" class="filter-chip" data-cat="combinados"
+            onclick="filterMenuCategory('combinados', this)">Combinados</button>
+          <button type="button" class="filter-chip" data-cat="temaki"
+            onclick="filterMenuCategory('temaki', this)">Temaki</button>
+          <button type="button" class="filter-chip" data-cat="yakissoba"
+            onclick="filterMenuCategory('yakissoba', this)">Yakissoba</button>
+          <button type="button" class="filter-chip" data-cat="bolinha"
+            onclick="filterMenuCategory('bolinha', this)">Bolinha de Salmão</button>
+          <button type="button" class="filter-chip" data-cat="monte" onclick="filterMenuCategory('monte', this)">Monte
+            seu Combo</button>
+        </div>
+
+        <!-- 1. CATEGORIA: COMBINADOS -->
+        <div class="menu-category-group" data-category-section="combinados">
+          <div class="menu-group-header">
+            <div class="logo-signature-kicker">
+              <span>01 · COMBINADOS PRONTOS</span>
+              <span class="sig-dash"></span>
+              <span class="sig-jp">和食</span>
+            </div>
+            <h2 class="section-heading" style="font-size: 22px;">Combinados</h2>
+          </div>
+
+          <article class="menu-item-card">
+            <div class="menu-item-img">
+              <img src="assets/combinados.png" alt="Combo Clássico 24 peças" loading="lazy" />
+              <span class="showcase-badge red">24 PEÇAS · PARA COMPARTILHAR</span>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Combo Clássico SHIMA</h3>
+                <span class="menu-item-price">R$ 148</span>
+              </div>
+              <p class="menu-item-desc">
+                Seleção de 8 sashimis de salmão, 6 niguiris, 6 uramakis philadelphia e 4 joys trufados.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('combo-classico', 'Combo Clássico SHIMA (24 pçs)', 148)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 148</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-img">
+              <img src="assets/combo-sashimi.png" alt="Combo Sashimi" loading="lazy" />
+              <span class="showcase-badge">14 PEÇAS · INDIVIDUAL</span>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Combo Sashimi &amp; Niguiri</h3>
+                <span class="menu-item-price">R$ 86</span>
+              </div>
+              <p class="menu-item-desc">
+                10 fatias de sashimi fresco do corte do dia acompanhadas de 4 niguiris de barriga de salmão.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('combo-sashimi', 'Combo Sashimi & Niguiri (14 pçs)', 86)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 86</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-body">
+              <span class="menu-item-portion">36 PEÇAS · EXPERIÊNCIA COMPLETA</span>
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Combinado Imperador SHIMA</h3>
+                <span class="menu-item-price">R$ 210</span>
+              </div>
+              <p class="menu-item-desc">
+                12 sashimis variados, 8 niguiris maçaricados no azeite trufado, 8 joys de salmão e 8 uramakis especiais.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('combo-imperador', 'Combinado Imperador SHIMA (36 pçs)', 210)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 210</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 2. CATEGORIA: TEMAKI -->
+        <div class="menu-category-group" data-category-section="temaki">
+          <div class="menu-group-header">
+            <div class="logo-signature-kicker">
+              <span>02 · CONES ENROLADOS NA HORA</span>
+              <span class="sig-dash"></span>
+              <span class="sig-jp">手巻</span>
+            </div>
+            <h2 class="section-heading" style="font-size: 22px;">Temaki</h2>
+          </div>
+
+          <article class="menu-item-card">
+            <div class="menu-item-img">
+              <img src="assets/temaki.jpg" alt="Temaki Salmão Completo" loading="lazy" />
+              <span class="showcase-badge red">160G · SUPER RECHEADO</span>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Temaki Salmão Completo</h3>
+                <span class="menu-item-price">R$ 36</span>
+              </div>
+              <p class="menu-item-desc">
+                Salmão fresco em cubos na faca, cream cheese opcional, cebolinha verde e gergelim tostado em alga nori
+                crocante.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('temaki-salmao', 'Temaki Salmão Completo', 36)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 36</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-body">
+              <span class="menu-item-portion">160G · TOQUE QUENTE</span>
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Temaki Salmão Grelhado &amp; Tarê</h3>
+                <span class="menu-item-price">R$ 38</span>
+              </div>
+              <p class="menu-item-desc">
+                Salmão grelhado na chapa com cream cheese, flocos crocantes de tempurá, tarê da casa e cebolinha.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('temaki-grelhado', 'Temaki Salmão Grelhado & Tarê', 38)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 38</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-body">
+              <span class="menu-item-portion">170G · ESPECIAL DA CASA</span>
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Temaki Salmão Trufado com Amêndoas</h3>
+                <span class="menu-item-price">R$ 42</span>
+              </div>
+              <p class="menu-item-desc">
+                Salmão batido com azeite de trufas brancas, raspas de limão siciliano e lâminas de amêndoas tostadas.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('temaki-trufado', 'Temaki Salmão Trufado', 42)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 42</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 3. CATEGORIA: YAKISSOBA -->
+        <div class="menu-category-group" data-category-section="yakissoba">
+          <div class="menu-group-header">
+            <div class="logo-signature-kicker">
+              <span>03 · QUENTES DA WOK</span>
+              <span class="sig-dash"></span>
+              <span class="sig-jp">焼そば</span>
+            </div>
+            <h2 class="section-heading" style="font-size: 22px;">Yakissoba</h2>
+          </div>
+
+          <article class="menu-item-card">
+            <div class="menu-item-img">
+              <img src="assets/yakissoba.jpg" alt="Yakissoba Artesanal SHIMA" loading="lazy" />
+              <span class="showcase-badge">450G · PREPARADO NA WOK</span>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Yakissoba Tradicional SHIMA</h3>
+                <span class="menu-item-price">R$ 54</span>
+              </div>
+              <p class="menu-item-desc">
+                Macarrão oriental artesanal salteado em fogo alto com tiras de carne e frango, brócolis, cenoura,
+                acelga, shiitake e molho shoyu da casa.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('yakissoba-trad', 'Yakissoba Tradicional SHIMA (450g)', 54)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 54</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-body">
+              <span class="menu-item-portion">450G · FRUTOS DO MAR</span>
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Yakissoba de Camarão &amp; Legumes</h3>
+                <span class="menu-item-price">R$ 68</span>
+              </div>
+              <p class="menu-item-desc">
+                Camarões grelhados no óleo de gergelim com legumes frescos crocantes, cogumelos e cebolinha.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('yakissoba-camarao', 'Yakissoba de Camarão (450g)', 68)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 68</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-body">
+              <span class="menu-item-portion">450G · VEGETARIANO</span>
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Yakissoba Shiitake &amp; Tofu Grelhado</h3>
+                <span class="menu-item-price">R$ 52</span>
+              </div>
+              <p class="menu-item-desc">
+                Cogumelos shiitake e shimeji na manteiga de gergelim, cubos de tofu dourado e mix de vegetais orgânicos.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('yakissoba-veg', 'Yakissoba Shiitake & Tofu (450g)', 52)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 52</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 4. CATEGORIA: BOLINHA DE SALMÃO -->
+        <div class="menu-category-group" data-category-section="bolinha">
+          <div class="menu-group-header">
+            <div class="logo-signature-kicker">
+              <span>04 · ENTRADAS QUENTES &amp; CROCANTES</span>
+              <span class="sig-dash"></span>
+              <span class="sig-jp">鮭</span>
+            </div>
+            <h2 class="section-heading" style="font-size: 22px;">Bolinha de Salmão</h2>
+          </div>
+
+          <article class="menu-item-card">
+            <div class="menu-item-img">
+              <img src="assets/bolinha-salmao.jpg" alt="Bolinha de Salmão Crocante" loading="lazy" />
+              <span class="showcase-badge red">6 UNIDADES · COM TARÊ</span>
+            </div>
+            <div class="menu-item-body">
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Bolinha de Salmão Crocante (6 un.)</h3>
+                <span class="menu-item-price">R$ 34</span>
+              </div>
+              <p class="menu-item-desc">
+                Porção com 6 bolinhas de salmão temperado recheadas com cream cheese, empanadas na farinha panko e
+                finalizadas com tarê e cebolinha.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('bolinha-6', 'Bolinha de Salmão Crocante (6 un.)', 34)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 34</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-item-card">
+            <div class="menu-item-body">
+              <span class="menu-item-portion">10 UNIDADES · PARA DIVIDIR</span>
+              <div class="menu-item-top">
+                <h3 class="menu-item-name">Bolinha de Salmão para Compartilhar (10 un.)</h3>
+                <span class="menu-item-price">R$ 48</span>
+              </div>
+              <p class="menu-item-desc">
+                10 unidades crocantes acompanhadas de molho tarê artesanal e maionese picante sriracha.
+              </p>
+              <div class="menu-item-actions">
+                <button type="button" class="btn-add-item"
+                  onclick="addToCart('bolinha-10', 'Bolinha de Salmão (10 un.)', 48)">
+                  <span>Adicionar ao carrinho</span>
+                  <span>+ R$ 48</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 5. CATEGORIA: MONTE SEU COMBO -->
+        <div class="custom-combo-box" data-category-section="monte">
+          <div class="custom-combo-header">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+              <span class="section-eyebrow" style="color: #f6c8c8;">05 · PERSONALIZADO PEÇA A PEÇA</span>
+              <img src="assets/simbolo-solar.svg" alt="SHIMA" style="width:28px; height:28px;" />
+            </div>
+            <h3>Monte seu combo</h3>
+            <p>Escolha a quantidade de cada família de sushi e adicione seu combo personalizado ao carrinho.</p>
+          </div>
+
+          <div class="piece-family-list">
+            <!-- Niguiri -->
+            <div class="piece-family-card">
+              <div class="piece-family-info">
+                <img src="assets/niguiri.png" alt="Niguiri" />
+                <div class="piece-family-text" style="flex:1;">
+                  <h4><span>Niguiri (dupla)</span><span class="piece-unit-price">R$ 14</span></h4>
+                  <p>Peças individuais com arroz temperado e fatia de salmão.</p>
+                </div>
+              </div>
+              <div class="piece-qty-row">
+                <span class="piece-qty-label">Quantidade (duplas)</span>
+                <div class="stepper-controls">
+                  <button type="button" class="stepper-btn" onclick="changeComboPiece('niguiri', -1)">−</button>
+                  <span class="stepper-val" id="qty-niguiri">2</span>
+                  <button type="button" class="stepper-btn plus" onclick="changeComboPiece('niguiri', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sashimi -->
+            <div class="piece-family-card">
+              <div class="piece-family-info">
+                <img src="assets/sashimi.png" alt="Sashimi" />
+                <div class="piece-family-text" style="flex:1;">
+                  <h4><span>Sashimi (3 fatias)</span><span class="piece-unit-price">R$ 18</span></h4>
+                  <p>Fatias frescas de salmão sem arroz.</p>
+                </div>
+              </div>
+              <div class="piece-qty-row">
+                <span class="piece-qty-label">Quantidade (porções)</span>
+                <div class="stepper-controls">
+                  <button type="button" class="stepper-btn" onclick="changeComboPiece('sashimi', -1)">−</button>
+                  <span class="stepper-val" id="qty-sashimi">1</span>
+                  <button type="button" class="stepper-btn plus" onclick="changeComboPiece('sashimi', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Joy -->
+            <div class="piece-family-card">
+              <div class="piece-family-info">
+                <img src="assets/joy.png" alt="Joy" />
+                <div class="piece-family-text" style="flex:1;">
+                  <h4><span>Joy (dupla)</span><span class="piece-unit-price">R$ 16</span></h4>
+                  <p>Enrolados em lâmina de salmão com tartar e cebolinha.</p>
+                </div>
+              </div>
+              <div class="piece-qty-row">
+                <span class="piece-qty-label">Quantidade (duplas)</span>
+                <div class="stepper-controls">
+                  <button type="button" class="stepper-btn" onclick="changeComboPiece('joy', -1)">−</button>
+                  <span class="stepper-val" id="qty-joy">0</span>
+                  <button type="button" class="stepper-btn plus" onclick="changeComboPiece('joy', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hossomaki -->
+            <div class="piece-family-card">
+              <div class="piece-family-info">
+                <img src="assets/hossomaki.png" alt="Hossomaki" />
+                <div class="piece-family-text" style="flex:1;">
+                  <h4><span>Hossomaki (4 peças)</span><span class="piece-unit-price">R$ 15</span></h4>
+                  <p>Rolos finos tradicionais em alga nori com salmão.</p>
+                </div>
+              </div>
+              <div class="piece-qty-row">
+                <span class="piece-qty-label">Quantidade (4 pçs)</span>
+                <div class="stepper-controls">
+                  <button type="button" class="stepper-btn" onclick="changeComboPiece('hossomaki', -1)">−</button>
+                  <span class="stepper-val" id="qty-hossomaki">0</span>
+                  <button type="button" class="stepper-btn plus" onclick="changeComboPiece('hossomaki', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Uramaki -->
+            <div class="piece-family-card">
+              <div class="piece-family-info">
+                <img src="assets/uramaki.png" alt="Uramaki" />
+                <div class="piece-family-text" style="flex:1;">
+                  <h4><span>Uramaki (4 peças)</span><span class="piece-unit-price">R$ 18</span></h4>
+                  <p>Rolos com arroz por fora, gergelim, salmão e cream cheese.</p>
+                </div>
+              </div>
+              <div class="piece-qty-row">
+                <span class="piece-qty-label">Quantidade (4 pçs)</span>
+                <div class="stepper-controls">
+                  <button type="button" class="stepper-btn" onclick="changeComboPiece('uramaki', -1)">−</button>
+                  <span class="stepper-val" id="qty-uramaki">0</span>
+                  <button type="button" class="stepper-btn plus" onclick="changeComboPiece('uramaki', 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hot -->
+            <div class="piece-family-card">
+              <div class="piece-family-info">
+                <img src="assets/hot.png" alt="Hot Roll" />
+                <div class="piece-family-text" style="flex:1;">
+                  <h4><span>Hot Roll (4 peças)</span><span class="piece-unit-price">R$ 19</span></h4>
+                  <p>Peças quentes e crocantes finalizadas com tarê.</p>
+                </div>
+              </div>
+              <div class="piece-qty-row">
+                <span class="piece-qty-label">Quantidade (4 pçs)</span>
+                <div class="stepper-controls">
+                  <button type="button" class="stepper-btn" onclick="changeComboPiece('hot', -1)">−</button>
+                  <span class="stepper-val" id="qty-hot">0</span>
+                  <button type="button" class="stepper-btn plus" onclick="changeComboPiece('hot', 1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="custom-combo-summary">
+            <div class="custom-combo-summary-row">
+              <span>Resumo do seu combo:</span>
+              <strong id="customComboDesc">3 porções selecionadas</strong>
+            </div>
+            <div class="custom-combo-summary-row" style="font-size: 14px;">
+              <span>Valor do Monte seu Combo:</span>
+              <strong style="color: #f6c8c8;" id="customComboPrice">R$ 46</strong>
+            </div>
+            <button type="button" class="btn-primary" style="width: 100%;" onclick="addCustomComboToCart()">
+              <span>Adicionar "Monte seu Combo" ao carrinho</span>
+              <span>+</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SEÇÃO DO CARRINHO DE COMPRAS -->
+        <div class="cart-drawer-section" id="cartSection">
+          <div class="cart-drawer-header">
+            <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+              <h3>Seu Carrinho</h3>
+              <button type="button" class="text-link" id="clearCartBtn" style="color:#f6c8c8; font-size:11px;"
+                onclick="clearCart()">
+                Limpar
+              </button>
+            </div>
+            <span style="font-size: 11px; color: #f6c8c8;" id="cartHeaderSubtitle">2 itens adicionados</span>
+          </div>
+
+          <div class="cart-items-container" id="cartItemsContainer">
+            <!-- Preenchido via JS -->
+          </div>
+
+          <div class="cart-options-box">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="deliveryTypeSelect">Modalidade</label>
+                <select id="deliveryTypeSelect" class="form-input" onchange="handleDeliveryModeChange(this.value)">
+                  <option value="delivery">Delivery (Entrega)</option>
+                  <option value="pickup">Retirada no Balcão (Grátis)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="paymentMethodSelect">Pagamento</label>
+                <select id="paymentMethodSelect" class="form-input">
+                  <option value="PIX">PIX</option>
+                  <option value="Cartão de Crédito">Cartão de Crédito</option>
+                  <option value="Cartão de Débito">Cartão de Débito</option>
+                  <option value="Vale-Refeição">Vale-Refeição</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:8px;">
+              <label class="form-label" for="orderNotes">Observações do pedido (hashis, shoyu, sem cebolinha...)</label>
+              <input id="orderNotes" class="form-input" type="text"
+                placeholder="Ex.: Enviar 2 pares de hashi e molho tarê extra" />
+            </div>
+          </div>
+
+          <div class="cart-totals-box">
+            <div class="cart-total-row">
+              <span>Subtotal dos produtos</span>
+              <span id="cartSubtotalText">R$ 182</span>
+            </div>
+            <div class="cart-total-row">
+              <span id="cartDeliveryLabel">Taxa de entrega</span>
+              <span id="cartDeliveryText">R$ 9</span>
+            </div>
+            <div class="cart-total-row grand">
+              <span>Total do pedido</span>
+              <span id="cartGrandTotalText" style="color: #950606;">R$ 191</span>
+            </div>
+            <button type="button" class="btn-primary hero-cta-full" style="margin-top: 10px;" onclick="finalizeOrder()">
+              <span>Finalizar pedido agora</span>
+              <span>✓</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra Fixa Inferior do Carrinho -->
+        <div class="checkout-bar-sticky">
+          <div class="checkout-bar-info">
+            <span id="stickyCartCount">2 ITENS NO CARRINHO</span>
+            <strong id="stickyCartTotal">R$ 191,00</strong>
+          </div>
+          <button type="button" class="btn-primary" style="padding: 11px 16px;" onclick="scrollToCart()">
+            <span>Ver carrinho</span>
+            <span>→</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Modal de Confirmação de Pedido -->
+  <div id="orderModalOverlay" class="order-modal-overlay" hidden>
+    <div class="order-modal-card" role="dialog" aria-labelledby="orderModalTitle">
+      <div class="order-modal-top">
+        <img src="assets/logo-shima-neg.svg" alt="SHIMA Oriental" style="height: 36px;" />
+        <span class="order-code-badge" id="modalOrderCode">#SHIMA-1042</span>
+      </div>
+      <div class="order-modal-body">
+        <h3 id="orderModalTitle">Pedido confirmado!</h3>
+        <p class="order-modal-sub" id="modalCustomerSummary">
+          Recebemos seu pedido na cozinha SHIMA. Tempo estimado: <strong>35–45 min</strong>.
+        </p>
+        <div class="order-modal-summary" id="modalItemsList"></div>
+        <div class="order-modal-actions">
+          <button type="button" class="btn-primary hero-cta-full" onclick="sendOrderToWhatsApp()">
+            <span>Acompanhar pelo WhatsApp</span>
+            <span>↗</span>
+          </button>
+          <button type="button" class="btn-outline" style="width:100%;" onclick="closeOrderModal()">
+            Voltar ao cardápio
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastFeedback" class="toast-feedback"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

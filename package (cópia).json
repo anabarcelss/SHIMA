@@ -1,0 +1,21 @@
+{
+  "name": "shima-mobile",
+  "version": "1.0.0",
+  "description": "SHIMA Oriental — Aplicativo Web Mobile-First (Apresentação, Cadastro, Login e Cardápio com Carrinho)",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx --yes serve . -l 3000",
+    "dev": "python3 -m http.server 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anabarcelss/SHIMA.git"
+  },
+  "keywords": [
+    "shima",
+    "sushi",
+    "delivery",
+    "mobile-first"
+  ],
+  "license": "ISC"
+}

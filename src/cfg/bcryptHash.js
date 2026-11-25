@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt'
-import "dotenv/config.js";
+const bcrypt = require("bcrypt");
+require("dotenv/config");
 const saltrounds = process.env.SALTROUNDS
 
 async function EncryptPassword(pw){
@@ -14,4 +14,4 @@ const result = await bcrypt.compare(data, encriptedPassword)
         return result   
 }
 
-export {EncryptPassword, ComparePassword}
+module.exports = { EncryptPassword, ComparePassword };

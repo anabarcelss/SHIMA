@@ -1,11 +1,15 @@
-import express from "express";
-import UserRoutes from "./userRoutes.js";
+const express = require("express");
+const customerRoutes = require("./customerRoutes.js");
+// Importadas as novas rotas de Order e Menu_item para anexá-las ao roteador principal
+const orderRoutes = require("./orderRoutes.js");
+const menuItemRoutes = require("./menuItemRoutes.js");
 
 const routes = (app) => {
-  app.route("/").get((req, res) => {
+  app.route ("/").get((req, res) => {
     res.status(200).send("Shimã Sushi API");
   });
-  app.use(express.json(), UserRoutes);
+  // Anexadas orderRoutes e menuItemRoutes junto de customerRoutes no app.use
+  app.use(express.json(), customerRoutes, orderRoutes, menuItemRoutes);
 };
 
-export default routes;
+module.exports = routes;

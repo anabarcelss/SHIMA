@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/anabarcelss/SHIMA/issues"
   },
@@ -25,11 +25,16 @@
     "dotenv": "^18.0.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.10.2",
     "mysql": "^2.18.1",
-    "mysql2": "^3.24.6"
+    "mysql2": "^3.24.6",
+    "qrcode-terminal": "^0.12.0",
+    "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5",
+    "whatsapp-web.js": "github:wwebjs/whatsapp-web.js"
   },
   "allowScripts": {
-    "bcrypt@6.0.0": true
+    "bcrypt@6.0.0": true,
+    "puppeteer@24.38.0": true,
+    "whatsapp-web.js@1.34.8": false
   }
 }

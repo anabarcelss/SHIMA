@@ -5,6 +5,7 @@ API REST em Node.js (CommonJS, Express 5, Sequelize 6 e MySQL) para gestão de c
 ## Documentação
 
 - [Bot do WhatsApp (`whatsappWeb.js`) — Guia de uso e referência das funções](docs/whatsapp-bot.md)
+- [Bateria de Testes (`tests/`) — Endpoints da API, Bot WhatsApp e resultados possíveis](tests.md)
 
 ## Início rápido
 
@@ -19,10 +20,13 @@ docker compose up -d
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 
-# 4. Iniciar o bot do WhatsApp (escanear QR Code na primeira vez)
+# 4. Rodar bateria automatizada de testes (API + Bot WhatsApp)
+npm run test
+
+# 5. Iniciar o bot do WhatsApp (escanear QR Code na primeira vez)
 node src/cfg/whatsappWeb.js
 
-# 5. Enviar um pedido aleatório real ou simular liberação de entrega pelo admin via WhatsApp
-node sendRandomOrder.js 27988460599
-node dispatchLastOrder.js 27988460599
+# 6. Enviar um pedido aleatório real ou simular liberação de entrega pelo admin via WhatsApp
+node tests/sendRandomOrder.js 27988460599
+node tests/dispatchLastOrder.js 27988460599
 ```

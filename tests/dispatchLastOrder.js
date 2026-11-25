@@ -7,19 +7,20 @@ const numericDigits = rawPhone.replace(/\D/g, '');
 const optionalOrderId = optionalOrderIdArg.trim();
 
 if (!rawPhone || numericDigits.length < 10) {
-    console.error('Uso: node dispatchLastOrder.js <numero_whatsapp> [order_id]');
-    console.error('Exemplo (último pedido pendente): node dispatchLastOrder.js 27988460599');
-    console.error('Exemplo (pedido específico): node dispatchLastOrder.js 27988460599 24');
+    console.error('Uso: node tests/dispatchLastOrder.js <numero_whatsapp> [order_id]');
+    console.error('Ou:  npm run test -- --dispatch <numero_whatsapp> [order_id]');
+    console.error('Exemplo (último pedido pendente): node tests/dispatchLastOrder.js 27988460599');
+    console.error('Exemplo (pedido específico): node tests/dispatchLastOrder.js 27988460599 24');
     process.exit(1);
 }
 
-const dataSource = require('./src/models');
+const dataSource = require('../src/models');
 const {
     dispatchOrderForDelivery,
     dispatchLastCustomerOrder,
     waitUntilBotReady,
     disconnectBot,
-} = require('./src/cfg/whatsappWeb.js');
+} = require('../src/cfg/whatsappWeb.js');
 
 async function main() {
     try {

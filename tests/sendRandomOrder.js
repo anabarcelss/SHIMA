@@ -5,17 +5,18 @@ const rawPhone = process.argv.slice(2).join(' ').trim();
 const numericDigits = rawPhone.replace(/\D/g, '');
 
 if (!rawPhone || numericDigits.length < 10) {
-    console.error('Uso: node sendRandomOrder.js <numero_whatsapp>');
-    console.error('Exemplo: node sendRandomOrder.js 27988460599');
+    console.error('Uso: node tests/sendRandomOrder.js <numero_whatsapp>');
+    console.error('Ou:  npm run test -- --random <numero_whatsapp>');
+    console.error('Exemplo: node tests/sendRandomOrder.js 27988460599');
     process.exit(1);
 }
 
-const dataSource = require('./src/models');
+const dataSource = require('../src/models');
 const {
     sendRandomCustomerOrder,
     waitUntilBotReady,
     disconnectBot,
-} = require('./src/cfg/whatsappWeb.js');
+} = require('../src/cfg/whatsappWeb.js');
 
 async function main() {
     try {

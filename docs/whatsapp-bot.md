@@ -273,30 +273,34 @@ Exemplo de corpo opcional enviado pelo painel admin:
 }
 ```
 
-### Utilitários executáveis via CLI (`sendRandomOrder.js` e `dispatchLastOrder.js`)
+### Utilitários executáveis via CLI (`tests/sendRandomOrder.js` e `tests/dispatchLastOrder.js`)
 
-Com o MySQL rodando (`docker compose up -d` e migrations/seeders aplicados) e a sessão do WhatsApp autenticada, você pode executar qualquer um dos dois scripts diretamente pelo terminal informando o número de destino:
+Com o MySQL rodando (`docker compose up -d` e migrations/seeders aplicados) e a sessão do WhatsApp autenticada, você pode executar qualquer um dos dois scripts diretamente pelo terminal (ou via `npm run test`) informando o número de destino:
 
-#### 1. Sortear e enviar um pedido real do banco (`sendRandomOrder.js`)
+#### 1. Sortear e enviar um pedido real do banco (`tests/sendRandomOrder.js`)
 
 ```bash
-node sendRandomOrder.js 27988460599
+node tests/sendRandomOrder.js 27988460599
+# ou via npm run test:
+npm run test -- --random 27988460599
 # ou diretamente como executável:
-./sendRandomOrder.js 27988460599
+./tests/sendRandomOrder.js 27988460599
 ```
 
-O executável [sendRandomOrder.js](../sendRandomOrder.js) chama `sendRandomCustomerOrder(phone)`, que consulta os `id`s existentes na tabela `orders`, sorteia um ID real e envia os dados reais do pedido correspondente (`Order`, `Customer` e `Menu_item`).
+O executável [tests/sendRandomOrder.js](../tests/sendRandomOrder.js) chama `sendRandomCustomerOrder(phone)`, que consulta os `id`s existentes na tabela `orders`, sorteia um ID real e envia os dados reais do pedido correspondente (`Order`, `Customer` e `Menu_item`).
 
-#### 2. Liberar para entrega o último pedido pendente (`dispatchLastOrder.js`)
+#### 2. Liberar para entrega o último pedido pendente (`tests/dispatchLastOrder.js`)
 
 ```bash
 # Libera o último pedido com status 'Em preparo' e envia o aviso de saída para entrega:
-node dispatchLastOrder.js 27988460599
+node tests/dispatchLastOrder.js 27988460599
+# ou via npm run test:
+npm run test -- --dispatch 27988460599
 # ou diretamente como executável:
-./dispatchLastOrder.js 27988460599
+./tests/dispatchLastOrder.js 27988460599
 
 # Opcionalmente, informe um order_id específico como segundo argumento:
-node dispatchLastOrder.js 27988460599 24
+node tests/dispatchLastOrder.js 27988460599 24
 ```
 
-O executável [dispatchLastOrder.js](../dispatchLastOrder.js) atua como admin (`adminRole: 'admin'`), busca o último pedido pendente na tabela `orders` (ou o `order_id` informado), atualiza o `status` para `'Saiu para entrega'` e envia a mensagem de saída para entrega para o número digitado no comando.
+O executável [tests/dispatchLastOrder.js](../tests/dispatchLastOrder.js) atua como admin (`adminRole: 'admin'`), busca o último pedido pendente na tabela `orders` (ou o `order_id` informado), atualiza o `status` para `'Saiu para entrega'` e envia a mensagem de saída para entrega para o número digitado no comando. Para detalhes sobre toda a bateria de testes, consulte [tests.md](../tests.md).

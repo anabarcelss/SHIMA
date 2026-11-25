@@ -12,6 +12,7 @@ tests/
 ├── api.test.js            # Bateria automatizada dos endpoints HTTP da API (26 testes / 5 suítes)
 ├── whatsappBot.test.js    # Bateria automatizada do Bot WhatsApp (10 testes / 5 suítes)
 ├── regression.test.js     # Suíte de não-regressão do estado atual e bugs corrigidos (8 testes REG-001..REG-008)
+├── inputValidation.test.js# Suíte de sanitização e validação de input (10 testes / 5 suítes)
 ├── sendRandomOrder.js     # Utilitário CLI executável: sorteia um pedido real do banco e envia no WhatsApp
 └── dispatchLastOrder.js   # Utilitário CLI executável: libera pedido para entrega como admin e notifica
 ```
@@ -39,10 +40,11 @@ tests/
 
 | Comando | O que executa | Envia WhatsApp real? | Código de saída esperado |
 |---|---|---|---|
-| `npm run test` | Bateria completa automatizada: `api.test.js` + `whatsappBot.test.js` + `regression.test.js` + validação CLI sem argumentos | Não | `0` (tudo passou) ou `1` (alguma falha) |
+| `npm run test` | Bateria completa automatizada: `api.test.js` + `whatsappBot.test.js` + `regression.test.js` + `inputValidation.test.js` + validação CLI sem argumentos | Não | `0` (tudo passou) ou `1` (alguma falha) |
 | `npm run test -- --api` (ou `npm run test:api`) | Apenas a suíte HTTP `tests/api.test.js` | Não | `0` ou `1` |
 | `npm run test -- --bot` (ou `npm run test:bot`) | Apenas a suíte funcional `tests/whatsappBot.test.js` | Não | `0` ou `1` |
 | `npm run test -- --regression` (ou `npm run test:regression`) | Apenas a suíte de não-regressão `tests/regression.test.js` | Não | `0` ou `1` |
+| `npm run test -- --validation` (ou `npm run test:validation`) | Apenas a suíte de sanitização e validação `tests/inputValidation.test.js` | Não | `0` ou `1` |
 | `npm run test -- --random <numero>` (ou `npm run test:random -- <numero>`) | Executa `tests/sendRandomOrder.js <numero>` | Sim | `0` (enviado) ou `1` (erro/args inválidos) |
 | `npm run test -- --dispatch <numero> [id]` (ou `npm run test:dispatch -- <numero> [id]`) | Executa `tests/dispatchLastOrder.js <numero> [id]` como admin | Sim | `0` (enviado) ou `1` (erro/args inválidos) |
 | `npm run test -- <numero>` (ou `--all <numero>`) | Bateria automatizada completa + envio aleatório + despacho de um pedido temporário limpo ao final | Sim | `0` ou `1` |
@@ -192,7 +194,20 @@ A suíte de não-regressão garante a estabilidade do estado atual da aplicaçã
 
 ---
 
-## 7. Diagnóstico rápido de falhas
+## 7. Suíte de Sanitização e Validação de Input (`tests/inputValidation.test.js`)
+
+Valida os middlewares de `src/middlewares/inputValidator.js` acoplados às rotas de login (`/login`), registro/atualização de clientes (`/register`, `/users/`, `/users/:id`) e pedidos (`/pedidos/`, `/pedidos/:id`, `/pedidos/:id/despachar`, `/pedidos/despachar-ultimo`).
+
+| Grupo / Rota | Regras de Sanitização Aplicadas | Regras de Validação (`400 RequisicaoIncorreta` quando falham) |
+|---|---|---|
+| `POST /register` e `POST /users/` | • Remove chaves `__proto__`/`constructor`/`prototype`.<br>• `name` e `address`: normalização Unicode `NFC`, remoção de `<script>...</script>`, tags HTML, `javascript:`, bytes nulos e espaços extras.<br>• `email`: minúsculas e `trim`.<br>• `phone`: remove máscara e zero inicial de tronco (`(027) 98846-0599` → `27988460599`).<br>• Ignora `role`/`id` enviados no payload (`role` fixado como `'user'`). | • `name`: 2..120 chars com pelo menos uma letra.<br>• `email`: formato válido (≤ 254 chars).<br>• `password`: 6..72 chars sem `\0` e igual a `repeatPassword`.<br>• `address`: 5..255 chars.<br>• `phone`: 10–11 dígitos (DDD 11–99) ou 12–13 dígitos com `55`.<br>• Rejeita tipos objeto/array/booleano. |
+| `POST /login` | • `email`: minúsculas e `trim`.<br>• Repassa apenas `{ email, password }`. | • Exige tipo `string` (bloqueia operator injection `{ "$ne": null }`).<br>• `email` válido e não vazio; `password` não vazia, sem `\0` e ≤ 128 chars. |
+| `GET`/`PUT`/`DELETE /users/:id` | • `validateIdParam`: normaliza `:id`.<br>• `PUT /users/:id`: permite apenas `name`, `email`, `address`, `phone`, `password` (bloqueia escalonamento de `role`). | • `:id` deve ser inteiro positivo (`1`..`2147483647`).<br>• `PUT`: valida campos informados e bloqueia troca de `email` para um já existente em outro cliente (`400`). |
+| `POST`/`PUT`/`PATCH /pedidos/` | • Sanitiza textos opcionais (`address`, `addressNumber`, `customerName`, `courierName`, `estimatedTime`, `items`).<br>• Limpa e formata `phone` opcional.<br>• Preenche `order_date` automaticamente quando omitido na criação.<br>• Persiste apenas os campos permitidos do model `Order`. | • `:id`, `customer_id`, `order_items_id`: inteiros positivos válidos.<br>• `OrderController.createData`: verifica existência de `Customer` e `Menu_item` (`400` se inexistentes).<br>• `total_amount`: número finito `> 0` e `<= 100000` (arredondado para 2 casas).<br>• `status`: apenas valores permitidos (`Em preparo`, `Pendente`, `Confirmado`, `Saiu para entrega`, `Entregue`, `Cancelado`).<br>• `deliveryFee >= 0`, `quantity >= 1`, `order_date` válida e `forceResend` booleano. |
+
+---
+
+## 8. Diagnóstico rápido de falhas
 
 - **`connect ECONNREFUSED 127.0.0.1:3306`**: o container MySQL está parado. Execute `docker compose up -d` e aguarde alguns segundos antes de rodar `npm run test`.
 - **Erro de tabela ou coluna inexistente (`status`)**: rode `npx sequelize-cli db:migrate` e `npx sequelize-cli db:seed:all`.

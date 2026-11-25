@@ -8,6 +8,7 @@
     "test:api": "node ./tests/runTests.js --api",
     "test:bot": "node ./tests/runTests.js --bot",
     "test:regression": "node ./tests/runTests.js --regression",
+    "test:validation": "node ./tests/runTests.js --validation",
     "test:random": "node ./tests/sendRandomOrder.js",
     "test:dispatch": "node ./tests/dispatchLastOrder.js",
     "dev": "node --watch ./server.js",

@@ -12,10 +12,11 @@ function printHelp() {
 Bateria de Testes — Shimã Sushi API & Bot WhatsApp
 
 Uso:
-  npm run test                             Executa toda a bateria automatizada (API + Bot WhatsApp + Não-Regressão + CLI)
+  npm run test                             Executa toda a bateria automatizada (API + Bot + Não-Regressão + Validação + CLI)
   npm run test -- --api                    Executa apenas a bateria dos endpoints da API (tests/api.test.js)
   npm run test -- --bot                    Executa apenas a bateria funcional do Bot WhatsApp (tests/whatsappBot.test.js)
   npm run test -- --regression             Executa apenas a suíte de não-regressão (tests/regression.test.js)
+  npm run test -- --validation             Executa apenas a suíte de sanitização e validação (tests/inputValidation.test.js)
   npm run test -- --random <numero>        Executa tests/sendRandomOrder.js enviando pedido aleatório real no WhatsApp
   npm run test -- --dispatch <numero> [id] Executa tests/dispatchLastOrder.js liberando entrega pelo admin no WhatsApp
   npm run test -- <numero>                 Executa bateria automatizada + teste real no WhatsApp para <numero>
@@ -37,7 +38,7 @@ function verifyCliValidation() {
         { file: 'tests/dispatchLastOrder.js', expectedText: 'Uso: node tests/dispatchLastOrder.js' },
     ];
 
-    console.log('\n[4/4] Validando comportamento dos scripts CLI sem argumentos...');
+    console.log('\n[5/5] Validando comportamento dos scripts CLI sem argumentos...');
     for (const { file, expectedText } of scripts) {
         const res = runNodeScript([path.join(rootDir, file)], { captureOutput: true });
         assert.equal(res.status, 1, `${file} deveria encerrar com código 1 sem argumentos`);
@@ -52,17 +53,24 @@ function verifyCliValidation() {
 function runAutomatedSuite() {
     const results = [];
 
-    console.log('\n[1/4] Executando bateria dos endpoints da API (tests/api.test.js)...');
+    console.log('\n[1/5] Executando bateria dos endpoints da API (tests/api.test.js)...');
     const apiRes = runNodeScript(['--test', path.join(__dirname, 'api.test.js')]);
     results.push({ name: 'API Endpoints (tests/api.test.js)', ok: apiRes.status === 0 });
 
-    console.log('\n[2/4] Executando bateria funcional do Bot WhatsApp (tests/whatsappBot.test.js)...');
+    console.log('\n[2/5] Executando bateria funcional do Bot WhatsApp (tests/whatsappBot.test.js)...');
     const botRes = runNodeScript(['--test', path.join(__dirname, 'whatsappBot.test.js')]);
     results.push({ name: 'Bot WhatsApp (tests/whatsappBot.test.js)', ok: botRes.status === 0 });
 
-    console.log('\n[3/4] Executando bateria de não-regressão (tests/regression.test.js)...');
+    console.log('\n[3/5] Executando bateria de não-regressão (tests/regression.test.js)...');
     const regRes = runNodeScript(['--test', path.join(__dirname, 'regression.test.js')]);
     results.push({ name: 'Não-Regressão (tests/regression.test.js)', ok: regRes.status === 0 });
+
+    console.log('\n[4/5] Executando suíte de sanitização e validação (tests/inputValidation.test.js)...');
+    const valRes = runNodeScript(['--test', path.join(__dirname, 'inputValidation.test.js')]);
+    results.push({
+        name: 'Sanitização e Validação (tests/inputValidation.test.js)',
+        ok: valRes.status === 0,
+    });
 
     let cliOk = false;
     try {
@@ -152,6 +160,11 @@ async function main() {
 
     if (firstArg === '--regression') {
         const res = runNodeScript(['--test', path.join(__dirname, 'regression.test.js')]);
+        process.exit(res.status ?? 1);
+    }
+
+    if (firstArg === '--validation') {
+        const res = runNodeScript(['--test', path.join(__dirname, 'inputValidation.test.js')]);
         process.exit(res.status ?? 1);
     }
 

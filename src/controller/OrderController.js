@@ -1,6 +1,7 @@
 const Controller = require('./Controller.js');
 const OrderServices = require("../services/OrderServices.js");
 const BaseError = require("../errors/BaseError.js");
+const RequisicaoIncorreta = require("../errors/RequisicaoIncorreta.js");
 const dataSource = require("../models");
 
 const orderServices = new OrderServices();
@@ -8,6 +9,45 @@ const orderServices = new OrderServices();
 class OrderController extends Controller {
     constructor() {
         super(orderServices);
+    }
+
+    // Valida referências no banco e persiste apenas os atributos limpos do model Order
+    async createData(req, res, next) {
+        const {
+            customer_id,
+            order_date,
+            order_items_id,
+            total_amount,
+            status = 'Em preparo',
+        } = req.body || {};
+
+        if (!customer_id || !order_items_id || total_amount === undefined) {
+            return next(new RequisicaoIncorreta("Dados para criação não fornecidos"));
+        }
+
+        try {
+            const [customer, menuItem] = await Promise.all([
+                dataSource.Customer.findByPk(customer_id, { attributes: ['id'] }),
+                dataSource.Menu_item.findByPk(order_items_id, { attributes: ['id'] }),
+            ]);
+
+            if (!customer || !menuItem) {
+                return next(
+                    new RequisicaoIncorreta("Cliente ou item do cardápio não encontrado")
+                );
+            }
+
+            const newOrder = await this.entityService.createRegistry({
+                customer_id,
+                order_date: order_date || new Date(),
+                order_items_id,
+                total_amount,
+                status,
+            });
+            return res.status(201).json(newOrder);
+        } catch (erro) {
+            return next(erro);
+        }
     }
 
     async _ensureAdmin(req) {

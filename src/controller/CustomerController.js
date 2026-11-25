@@ -76,9 +76,15 @@ class CustomerController extends Controller {
         }
     }
 
-    // Garante que atualizações de senha também sejam criptografadas antes de salvar
+    // Garante validação de duplicidade de email e criptografia de senha ao atualizar cliente
     async updateData(req, res, next) {
         try {
+            if (req.body && req.body.email) {
+                const existingCustomer = await this.entityService.getCustomerByEmail(req.body.email);
+                if (existingCustomer && existingCustomer.id !== Number(req.params.id)) {
+                    return next(new RequisicaoIncorreta("Email já cadastrado"));
+                }
+            }
             if (req.body && req.body.password) {
                 req.body.password = await EncryptPassword(req.body.password);
             }

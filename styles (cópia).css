@@ -1,0 +1,1463 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --shima-red: #950606;
+  --shima-red-hover: #7a0404;
+  --shima-red-light: #f6c8c8;
+  --shima-black: #141414;
+  --shima-dark: #191917;
+  --shima-dark-border: #3a3a38;
+  --shima-bg: #f5f1e9;
+  --shima-surface: #f5f1e9;
+  --shima-card: #ece7dc;
+  --shima-border: #d9d2c5;
+  --shima-border-strong: #cfc8bd;
+  --shima-muted: #716b64;
+  --shima-muted-light: #b8b5ae;
+  /* Fontes da identidade do logo SHIMA Oriental 和食 */
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Poppins', 'Montserrat', sans-serif;
+  --font-signature: 'Montserrat', sans-serif;
+  --font-jp: 'Noto Sans JP', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--shima-black);
+  color: var(--shima-black);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+.proto-switcher[hidden] {
+  display: none !important;
+}
+
+/* Barra superior de controle das 4 telas (modo ?preview=4telas) */
+.proto-switcher {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: var(--shima-black);
+  border-bottom: 1px solid var(--shima-dark-border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.proto-switcher-label {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--shima-muted-light);
+  margin-right: 6px;
+}
+
+.proto-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.proto-tab {
+  background: #242421;
+  color: var(--shima-surface);
+  border: 1px solid var(--shima-dark-border);
+  padding: 6px 12px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.proto-tab:hover {
+  border-color: var(--shima-muted-light);
+}
+
+.proto-tab.active {
+  background: var(--shima-red);
+  border-color: var(--shima-red);
+  color: var(--shima-surface);
+}
+
+.proto-view-mode {
+  background: transparent;
+  color: var(--shima-red-light);
+  border: 1px dashed var(--shima-red);
+  padding: 6px 12px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.proto-view-mode.active {
+  background: var(--shima-surface);
+  color: var(--shima-black);
+  border-style: solid;
+  border-color: var(--shima-surface);
+}
+
+/* Container das telas */
+.screens-stage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.screens-stage.all-screens-mode {
+  justify-content: flex-start;
+  overflow-x: auto;
+  gap: 28px;
+  padding: 32px 32px 64px;
+  align-items: flex-start;
+  background-color: #dfdad0;
+}
+
+.screen-wrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+.screen-wrapper.active-screen {
+  display: flex;
+}
+
+.screens-stage.all-screens-mode .screen-wrapper {
+  display: flex;
+  width: 390px;
+  flex-shrink: 0;
+}
+
+.screen-frame-title {
+  display: none;
+  width: 390px;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--shima-black);
+  background: #cfc8bd;
+  padding: 7px 12px;
+  border-radius: 4px;
+}
+
+.screens-stage.all-screens-mode .screen-frame-title {
+  display: flex;
+}
+
+/* Container Mobile-First Principal */
+.mobile-screen {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  background: var(--shima-surface);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.55);
+  border-left: 1px solid var(--shima-dark-border);
+  border-right: 1px solid var(--shima-dark-border);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.screens-stage.all-screens-mode .mobile-screen {
+  width: 390px;
+  min-height: 844px;
+  border: 1px solid var(--shima-border-strong);
+  box-shadow: 0 20px 50px rgba(20, 20, 20, 0.22);
+}
+
+@media (max-width: 480px) {
+  .mobile-screen {
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+}
+
+/* Navegação Global Mobile com o Logo Oficial SHIMA Oriental */
+.shima-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--shima-surface);
+  height: 78px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--shima-border-strong);
+  flex-shrink: 0;
+}
+
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.brand-logo-img {
+  height: 50px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.brand-logo-neg-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Assinatura Decorativa inspirada no Logo (ORIENTAL — 和食) */
+.logo-signature-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--shima-red);
+}
+
+.logo-signature-kicker .sig-dash {
+  width: 22px;
+  height: 1.5px;
+  background: var(--shima-red);
+  display: inline-block;
+}
+
+.logo-signature-kicker .sig-jp {
+  font-family: var(--font-jp);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* Botões padrão SHIMA */
+.btn-primary {
+  background: var(--shima-red);
+  color: var(--shima-surface);
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 14px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: background 0.18s ease, transform 0.1s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--shima-red-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.99);
+}
+
+.btn-nav-cta {
+  padding: 8px 13px;
+  font-size: 11px;
+  height: 34px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.btn-ghost-light {
+  background: transparent;
+  color: var(--shima-black);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 4px;
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.btn-ghost-light:hover {
+  border-color: var(--shima-black);
+}
+
+.btn-ghost-dark {
+  background: transparent;
+  color: var(--shima-muted-light);
+  border: 1px solid var(--shima-dark-border);
+  border-radius: 4px;
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 7px 11px;
+  cursor: pointer;
+}
+
+.btn-ghost-dark:hover {
+  color: var(--shima-surface);
+  border-color: var(--shima-muted-light);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--shima-black);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 13px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Hero Tela 1 (seguindo Abertura mobile 20:1340 do manual da marca) */
+.hero-image-box {
+  width: 100%;
+  height: 270px;
+  position: relative;
+  overflow: hidden;
+  background: var(--shima-black);
+}
+
+.hero-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-tag-overlay {
+  position: absolute;
+  bottom: 14px;
+  left: 20px;
+  background: rgba(20, 20, 20, 0.88);
+  color: var(--shima-surface);
+  padding: 5px 11px;
+  font-family: var(--font-signature);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-left: 3px solid var(--shima-red);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-body {
+  background: var(--shima-surface);
+  padding: 24px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  border-bottom: 1px solid var(--shima-border-strong);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--shima-red);
+  text-transform: uppercase;
+}
+
+/* Títulos em Poppins ExtraBold com tracking negativo remetendo ao lettering SHIMA */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--shima-black);
+}
+
+.hero-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--shima-muted);
+}
+
+.hero-cta-full {
+  width: 100%;
+  height: 50px;
+  font-size: 13px;
+}
+
+.badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.badge-pill {
+  border: 1px solid var(--shima-border-strong);
+  background: var(--shima-card);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-family: var(--font-signature);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--shima-muted);
+}
+
+/* Seção O Que Vendemos (5 Categorias) */
+.section-block {
+  padding: 28px 20px 32px;
+  background: var(--shima-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.section-eyebrow {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--shima-red);
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--shima-black);
+  font-weight: 800;
+}
+
+.section-sub {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--shima-muted);
+}
+
+.showcase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.showcase-card {
+  background: var(--shima-card);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: border-color 0.18s ease, transform 0.15s ease;
+}
+
+.showcase-card:hover {
+  border-color: var(--shima-red);
+}
+
+.showcase-card-img {
+  width: 100%;
+  height: 175px;
+  position: relative;
+  overflow: hidden;
+  background: var(--shima-black);
+}
+
+.showcase-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.showcase-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--shima-black);
+  color: var(--shima-surface);
+  font-family: var(--font-signature);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.showcase-badge.red {
+  background: var(--shima-red);
+}
+
+.showcase-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.showcase-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.showcase-card-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--shima-black);
+}
+
+.showcase-card-price {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--shima-red);
+  white-space: nowrap;
+}
+
+.showcase-card-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--shima-muted);
+}
+
+.showcase-card-link {
+  margin-top: 6px;
+  font-family: var(--font-signature);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--shima-red);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Destaque Monte Seu Combo na Tela 1 */
+.monte-highlight-card {
+  background: var(--shima-black);
+  color: var(--shima-surface);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--shima-dark-border);
+}
+
+.monte-highlight-card .showcase-card-title {
+  color: var(--shima-surface);
+}
+
+.monte-highlight-card .showcase-card-desc {
+  color: var(--shima-muted-light);
+}
+
+.monte-mini-thumbs {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.monte-mini-thumbs img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid var(--shima-dark-border);
+}
+
+/* Banner Pedido & Rodapé */
+.red-cta-banner {
+  background: var(--shima-red);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.red-cta-banner .eyebrow {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--shima-red-light);
+}
+
+.red-cta-banner h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.08;
+  letter-spacing: -1.1px;
+  color: var(--shima-surface);
+  font-weight: 800;
+}
+
+.red-cta-banner p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--shima-red-light);
+}
+
+.btn-light-red {
+  background: var(--shima-surface);
+  color: var(--shima-red);
+  border: none;
+  border-radius: 4px;
+  height: 50px;
+  padding: 0 20px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+}
+
+.shima-footer {
+  background: var(--shima-black);
+  padding: 28px 20px;
+  color: var(--shima-muted-light);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.shima-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shima-footer-meta {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--shima-muted-light);
+}
+
+.shima-footer-copy {
+  border-top: 1px solid var(--shima-dark-border);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-signature);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--shima-muted);
+}
+
+/* TELAS 2 e 3: Autenticação (Cadastro & Login) */
+.auth-header {
+  background: var(--shima-black);
+  padding: 22px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-header-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.auth-header-symbol {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--shima-border-strong);
+  color: var(--shima-black);
+  border-radius: 4px;
+  padding: 6px 11px;
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.auth-step-tag {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--shima-red-light);
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--shima-surface);
+  font-weight: 800;
+}
+
+.auth-subtitle {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--shima-muted-light);
+}
+
+.auth-body {
+  padding: 24px 20px 32px;
+  background: var(--shima-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+.form-section-title {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--shima-red);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--shima-border-strong);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-label {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--shima-black);
+}
+
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--shima-card);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--shima-black);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--shima-red);
+  background: #ffffff;
+}
+
+.form-helper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--shima-muted);
+}
+
+.text-link {
+  background: none;
+  border: none;
+  color: var(--shima-red);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-switch-box {
+  background: var(--shima-card);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth-switch-box p {
+  font-size: 12px;
+  color: var(--shima-muted);
+}
+
+.benefit-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--shima-card);
+  border-left: 3px solid var(--shima-red);
+  padding: 10px 12px;
+  font-size: 11px;
+  color: var(--shima-black);
+  line-height: 1.45;
+}
+
+.benefit-strip img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* TELA 4: Cardápio Completo + Monte seu Combo + Carrinho */
+.delivery-address-bar {
+  background: var(--shima-black);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--shima-dark-border);
+  font-size: 11px;
+  color: var(--shima-muted-light);
+}
+
+.delivery-address-bar strong {
+  color: var(--shima-surface);
+  font-weight: 600;
+}
+
+.cart-pill-btn {
+  background: var(--shima-red);
+  color: var(--shima-surface);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: var(--font-signature);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.cart-count-badge {
+  background: var(--shima-surface);
+  color: var(--shima-red);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+/* Barra de Categorias Sticky na Tela 4 */
+.menu-filter-bar {
+  background: var(--shima-surface);
+  border-bottom: 1px solid var(--shima-border-strong);
+  padding: 12px 20px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.menu-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  background: var(--shima-card);
+  color: var(--shima-black);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 4px;
+  padding: 7px 13px;
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  background: var(--shima-red);
+  color: var(--shima-surface);
+  border-color: var(--shima-red);
+}
+
+.menu-category-group {
+  padding: 24px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-group-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid var(--shima-border-strong);
+  padding-bottom: 10px;
+}
+
+.menu-item-card {
+  background: var(--shima-card);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-img {
+  width: 100%;
+  height: 165px;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-item-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-item-portion {
+  font-family: var(--font-signature);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--shima-muted);
+}
+
+.menu-item-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.menu-item-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--shima-black);
+}
+
+.menu-item-price {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--shima-red);
+  white-space: nowrap;
+}
+
+.menu-item-desc {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--shima-muted);
+}
+
+.menu-item-actions {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-add-item {
+  background: var(--shima-black);
+  color: var(--shima-surface);
+  border: none;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s ease;
+}
+
+.btn-add-item:hover {
+  background: var(--shima-red);
+}
+
+/* Bloco Monte Seu Combo na Tela 4 */
+.custom-combo-box {
+  margin: 16px 20px 24px;
+  background: var(--shima-black);
+  border-radius: 6px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.custom-combo-header h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.9px;
+  color: var(--shima-surface);
+}
+
+.custom-combo-header p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--shima-muted-light);
+  margin-top: 4px;
+}
+
+.piece-family-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.piece-family-card {
+  background: #242421;
+  border: 1px solid var(--shima-dark-border);
+  border-radius: 5px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.piece-family-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.piece-family-info img {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.piece-family-text h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--shima-surface);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.piece-unit-price {
+  color: var(--shima-red-light);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.piece-family-text p {
+  font-size: 11px;
+  color: var(--shima-muted-light);
+  margin-top: 2px;
+}
+
+.piece-qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #32322f;
+  padding-top: 8px;
+}
+
+.piece-qty-label {
+  font-family: var(--font-signature);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--shima-muted-light);
+}
+
+.stepper-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  border: 1px solid var(--shima-dark-border);
+  background: var(--shima-black);
+  color: var(--shima-surface);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper-btn.plus {
+  background: var(--shima-red);
+  border-color: var(--shima-red);
+}
+
+.stepper-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--shima-surface);
+  min-width: 16px;
+  text-align: center;
+}
+
+.custom-combo-summary {
+  background: #242421;
+  border: 1px solid var(--shima-dark-border);
+  padding: 12px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.custom-combo-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--shima-surface);
+}
+
+/* Seção do Carrinho Integrado na Tela 4 */
+.cart-drawer-section {
+  margin: 0 20px 28px;
+  background: #ffffff;
+  border: 2px solid var(--shima-black);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cart-drawer-header {
+  background: var(--shima-black);
+  color: var(--shima-surface);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-drawer-header h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.cart-items-container {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-line-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--shima-border);
+}
+
+.cart-line-info h5 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--shima-black);
+}
+
+.cart-line-info span {
+  font-size: 11px;
+  color: var(--shima-muted);
+}
+
+.cart-line-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-mini-btn {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--shima-border-strong);
+  background: var(--shima-card);
+  color: var(--shima-black);
+  font-weight: 700;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.cart-options-box {
+  padding: 14px 16px;
+  border-top: 1px solid var(--shima-border);
+  background: var(--shima-surface);
+}
+
+.cart-totals-box {
+  background: var(--shima-card);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--shima-border-strong);
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--shima-muted);
+}
+
+.cart-total-row.grand {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--shima-black);
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--shima-border-strong);
+}
+
+.checkout-bar-sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  background: var(--shima-black);
+  border-top: 1px solid var(--shima-dark-border);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.checkout-bar-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-bar-info span {
+  font-family: var(--font-signature);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--shima-muted-light);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.checkout-bar-info strong {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--shima-surface);
+}
+
+/* Modal de Confirmação de Pedido */
+.order-modal-overlay[hidden] {
+  display: none !important;
+}
+
+.order-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  background: rgba(20, 20, 20, 0.8);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.order-modal-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--shima-surface);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+.order-modal-top {
+  background: var(--shima-black);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--shima-red);
+}
+
+.order-code-badge {
+  font-family: var(--font-signature);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--shima-red-light);
+  background: #281414;
+  border: 1px solid var(--shima-red);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.order-modal-body {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-modal-body h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--shima-black);
+}
+
+.order-modal-sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--shima-muted);
+}
+
+.order-modal-summary {
+  background: var(--shima-card);
+  border: 1px solid var(--shima-border-strong);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--shima-black);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.order-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.toast-feedback {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--shima-black);
+  color: var(--shima-surface);
+  border-left: 4px solid var(--shima-red);
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  z-index: 3000;
+  display: none;
+}
+
+.toast-feedback.visible {
+  display: block;
+}
